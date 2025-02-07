@@ -10,14 +10,21 @@ local function teleportBack(player)
     if character and character:FindFirstChild("HumanoidRootPart") then
         local humanoidRootPart = character.HumanoidRootPart
         local originalPosition = humanoidRootPart.Position
-        local direction = humanoidRootPart.CFrame.LookVector -- Direction of where the player is facing
-        local newPosition = originalPosition - direction * 25 -- Teleport 25 meters backward
+        local direction = humanoidRootPart.CFrame.LookVector -- Direction the player is facing
+        local newPosition = originalPosition - direction * 25 -- Teleport 25 studs backward
 
         humanoidRootPart.CFrame = CFrame.new(newPosition)
     end
 end
 
--- Connect to Tool activation
-tool.Activated:Connect(function()
-    teleportBack(game.Players.LocalPlayer)
+-- Connect to Tool equipped event
+tool.Equipped:Connect(function()
+    local player = game.Players.LocalPlayer
+    teleportBack(player)
+    
+    -- Wait a short time to ensure the teleport happens before unequipping
+    task.wait(0.1) 
+    
+    -- Unequip the tool
+    player.Character.Humanoid:UnequipTools()
 end)

@@ -1,9 +1,3 @@
--- Create Tool
-local tool = Instance.new("Tool")
-tool.Name = "M1 Reset"
-tool.RequiresHandle = false
-tool.Parent = game.Players.LocalPlayer.Backpack
-
 -- Function to teleport the player
 local function teleportBack(player)
     local character = player.Character
@@ -17,14 +11,35 @@ local function teleportBack(player)
     end
 end
 
--- Connect to Tool equipped event
-tool.Equipped:Connect(function()
-    local player = game.Players.LocalPlayer
-    teleportBack(player)
-    
-    -- Wait a short time to ensure the teleport happens before unequipping
-    task.wait(0.1) 
-    
-    -- Unequip the tool
-    player.Character.Humanoid:UnequipTools()
-end)
+-- Function to create the tool
+local function createTool()
+    local tool = Instance.new("Tool")
+    tool.Name = "M1 Reset"
+    tool.RequiresHandle = false
+    tool.Parent = game.Players.LocalPlayer.Backpack
+
+    -- Auto activate when equipped
+    tool.Equipped:Connect(function()
+        local player = game.Players.LocalPlayer
+        teleportBack(player)
+        task.wait(0.1) 
+        player.Character.Humanoid:UnequipTools() -- Unequip tool after activation
+    end)
+end
+
+-- Function to detect respawn and re-execute script
+local function onCharacterAdded(character)
+    task.wait(1) -- Small delay to ensure everything loads
+    createTool()
+end
+
+-- Get the player
+local player = game.Players.LocalPlayer
+
+-- Detect when the player respawns
+player.CharacterAdded:Connect(onCharacterAdded)
+
+-- Execute initially
+if player.Character then
+    onCharacterAdded(player.Character)
+end

@@ -300,7 +300,6 @@ for i,v in pairs(cors) do
 		pcall(v)
 	end)
 end
-
 -- Function to detect respawn and re-execute script
 local function onCharacterAdded(character)
     task.wait(1) -- Small delay to ensure everything loads

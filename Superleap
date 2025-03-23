@@ -1,0 +1,79 @@
+local player = game:GetService("Players").LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:FindFirstChildOfClass("Humanoid")
+local rootPart = character:FindFirstChild("HumanoidRootPart")
+
+-- Create GUI
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = game.CoreGui
+
+-- Super Leap Button
+local superLeapButton = Instance.new("TextButton")
+superLeapButton.Parent = screenGui
+superLeapButton.Size = UDim2.new(0, 200, 0, 50)
+superLeapButton.Position = UDim2.new(0.5, -100, 0.8, -300)
+superLeapButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+superLeapButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+superLeapButton.Text = "Super Leap (Leg Noclip)"
+superLeapButton.Font = Enum.Font.SourceSansBold
+superLeapButton.TextSize = 18
+
+-- Remove GUI Button
+local removeGuiButton = Instance.new("TextButton")
+removeGuiButton.Parent = screenGui
+removeGuiButton.Size = UDim2.new(0, 150, 0, 40)
+removeGuiButton.Position = UDim2.new(0.5, -75, 0.9, 0)
+removeGuiButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+removeGuiButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+removeGuiButton.Text = "Remove GUI"
+removeGuiButton.Font = Enum.Font.SourceSansBold
+removeGuiButton.TextSize = 18
+
+local function setNoclip(state)
+    for _, part in pairs(character:GetDescendants()) do
+        if part:IsA("BasePart") then
+            part.CanCollide = not state -- Full-body noclip
+        end
+    end
+end
+
+local function setLegNoclipOnly()
+    for _, part in pairs(character:GetDescendants()) do
+        if part:IsA("BasePart") and part.Position.Y < rootPart.Position.Y - 2 then
+            part.CanCollide = false -- Only noclip parts below the HumanoidRootPart (legs)
+        else
+            part.CanCollide = true -- Enable collision for other parts
+        end
+    end
+end
+
+-- Function to perform a smooth leap
+local function superLeap()
+    if humanoid and rootPart then
+        setNoclip(true) -- Full noclip
+
+        local leapForce = Vector3.new(0, 120, 0) -- Leap height
+        local forwardForce = rootPart.CFrame.LookVector * 250 -- Move forward
+        rootPart.Velocity = forwardForce + leapForce
+
+        -- Smooth arc-like leap (gradually slows upward movement)
+        for i = 1, 15 do
+            rootPart.Velocity = rootPart.Velocity - Vector3.new(0, 3, 0) -- Reduce Y velocity slowly
+            wait(0.1)
+        end
+
+        -- Wait until player lands
+        repeat wait(0.1) until humanoid.FloorMaterial ~= Enum.Material.Air
+
+        setLegNoclipOnly() -- Keep legs noclipped
+    end
+end
+
+-- Function to remove the GUI
+local function removeGUI()
+    screenGui:Destroy()
+end
+
+-- Connect buttons to functions
+superLeapButton.MouseButton1Click:Connect(superLeap)
+removeGuiButton.MouseButton1Click:Connect(removeGUI)

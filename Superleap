@@ -2,12 +2,13 @@ local player = game:GetService("Players").LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:FindFirstChildOfClass("Humanoid")
 local rootPart = character:FindFirstChild("HumanoidRootPart")
+local runService = game:GetService("RunService")
 
 -- Create GUI
 local screenGui = Instance.new("ScreenGui")
 screenGui.Parent = game.CoreGui
 
--- Main Container for Buttons (Will be Hidden/Shown)
+-- Main Container for Buttons
 local mainFrame = Instance.new("Frame")
 mainFrame.Parent = screenGui
 mainFrame.Size = UDim2.new(0, 250, 0, 150)
@@ -36,22 +37,22 @@ noclipButton.Text = "Toggle Noclip (OFF)"
 noclipButton.Font = Enum.Font.SourceSansBold
 noclipButton.TextSize = 18
 
--- Toggle GUI Button (Always Visible)
+-- Toggle GUI Button
 local toggleGuiButton = Instance.new("TextButton")
 toggleGuiButton.Parent = screenGui
 toggleGuiButton.Size = UDim2.new(0, 150, 0, 40)
-toggleGuiButton.Position = UDim2.new(0, 10, 0, 10) -- Top left corner
+toggleGuiButton.Position = UDim2.new(0, 10, 0, 10)
 toggleGuiButton.BackgroundColor3 = Color3.fromRGB(255, 165, 0)
 toggleGuiButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 toggleGuiButton.Text = "Toggle GUI (Hide)"
 toggleGuiButton.Font = Enum.Font.SourceSansBold
 toggleGuiButton.TextSize = 18
 
--- Remove GUI Button (Hidden/Shown with GUI)
+-- Remove GUI Button
 local removeGuiButton = Instance.new("TextButton")
 removeGuiButton.Parent = screenGui
 removeGuiButton.Size = UDim2.new(0, 100, 0, 40)
-removeGuiButton.Position = UDim2.new(1, -110, 0, 10) -- Upper right corner
+removeGuiButton.Position = UDim2.new(1, -110, 0, 10)
 removeGuiButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
 removeGuiButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 removeGuiButton.Text = "Remove GUI"
@@ -61,30 +62,60 @@ removeGuiButton.TextSize = 16
 local noclipEnabled = false
 local guiVisible = true
 
-local function setNoclip(state)
-    for _, part in pairs(character:GetDescendants()) do
-        if part:IsA("BasePart") then
-            part.CanCollide = not state
+-- Permanent Leg Noclip
+local function setLegsNoclip()
+    if character then
+        for _, part in pairs(character:GetChildren()) do
+            if part:IsA("BasePart") and (
+                part.Name == "Left Leg" or part.Name == "Right Leg" or
+                part.Name == "LeftLowerLeg" or part.Name == "RightLowerLeg" or
+                part.Name == "LeftFoot" or part.Name == "RightFoot") then
+                part.CanCollide = false
+            end
         end
     end
 end
 
+setLegsNoclip() -- Ensure legs are permanently noclipped at script start
+
+-- Noclip Toggle Function (Runs Every Frame When Enabled)
 local function toggleNoclip()
     noclipEnabled = not noclipEnabled
-    setNoclip(noclipEnabled)
-    
+
     if noclipEnabled then
         noclipButton.Text = "Toggle Noclip (ON)"
         noclipButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+
+        -- Continuous noclip
+        runService.RenderStepped:Connect(function()
+            if noclipEnabled and character then
+                for _, part in pairs(character:GetDescendants()) do
+                    if part:IsA("BasePart") then
+                        part.CanCollide = false
+                    end
+                end
+            end
+        end)
     else
         noclipButton.Text = "Toggle Noclip (OFF)"
         noclipButton.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
+
+        -- Restore collision for all parts (except legs)
+        for _, part in pairs(character:GetDescendants()) do
+            if part:IsA("BasePart") and not (
+                part.Name == "Left Leg" or part.Name == "Right Leg" or
+                part.Name == "LeftLowerLeg" or part.Name == "RightLowerLeg" or
+                part.Name == "LeftFoot" or part.Name == "RightFoot") then
+                part.CanCollide = true
+            end
+        end
     end
 end
 
+-- Super Leap Function
 local function superLeap()
     if humanoid and rootPart then
-        setNoclip(true)
+        setLegsNoclip() -- Ensure legs stay noclipped
 
         local leapForce = Vector3.new(0, 120, 0)
         local forwardForce = rootPart.CFrame.LookVector * 250
@@ -96,23 +127,19 @@ local function superLeap()
         end
 
         repeat wait(0.1) until humanoid.FloorMaterial ~= Enum.Material.Air
-
-        setNoclip(noclipEnabled)
     end
 end
 
+-- Toggle GUI Visibility
 local function toggleGUI()
     guiVisible = not guiVisible
     mainFrame.Visible = guiVisible
     removeGuiButton.Visible = guiVisible
 
-    if guiVisible then
-        toggleGuiButton.Text = "Toggle GUI (Hide)"
-    else
-        toggleGuiButton.Text = "Toggle GUI (Show)"
-    end
+    toggleGuiButton.Text = guiVisible and "Toggle GUI (Hide)" or "Toggle GUI (Show)"
 end
 
+-- Remove GUI
 local function removeGUI()
     screenGui:Destroy()
 end

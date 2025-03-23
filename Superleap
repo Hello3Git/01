@@ -7,73 +7,117 @@ local rootPart = character:FindFirstChild("HumanoidRootPart")
 local screenGui = Instance.new("ScreenGui")
 screenGui.Parent = game.CoreGui
 
+-- Main Container for Buttons (Will be Hidden/Shown)
+local mainFrame = Instance.new("Frame")
+mainFrame.Parent = screenGui
+mainFrame.Size = UDim2.new(0, 250, 0, 150)
+mainFrame.Position = UDim2.new(0.5, -125, 0.8, -300)
+mainFrame.BackgroundTransparency = 1
+
 -- Super Leap Button
 local superLeapButton = Instance.new("TextButton")
-superLeapButton.Parent = screenGui
+superLeapButton.Parent = mainFrame
 superLeapButton.Size = UDim2.new(0, 200, 0, 50)
-superLeapButton.Position = UDim2.new(0.5, -100, 0.8, -300)
+superLeapButton.Position = UDim2.new(0, 25, 0, 0)
 superLeapButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 superLeapButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 superLeapButton.Text = "Super Leap (Leg Noclip)"
 superLeapButton.Font = Enum.Font.SourceSansBold
 superLeapButton.TextSize = 18
 
--- Remove GUI Button
+-- Toggle Noclip Button
+local noclipButton = Instance.new("TextButton")
+noclipButton.Parent = mainFrame
+noclipButton.Size = UDim2.new(0, 200, 0, 50)
+noclipButton.Position = UDim2.new(0, 25, 0, 60)
+noclipButton.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
+noclipButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+noclipButton.Text = "Toggle Noclip (OFF)"
+noclipButton.Font = Enum.Font.SourceSansBold
+noclipButton.TextSize = 18
+
+-- Toggle GUI Button (Always Visible)
+local toggleGuiButton = Instance.new("TextButton")
+toggleGuiButton.Parent = screenGui
+toggleGuiButton.Size = UDim2.new(0, 150, 0, 40)
+toggleGuiButton.Position = UDim2.new(0, 10, 0, 10) -- Top left corner
+toggleGuiButton.BackgroundColor3 = Color3.fromRGB(255, 165, 0)
+toggleGuiButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+toggleGuiButton.Text = "Toggle GUI (Hide)"
+toggleGuiButton.Font = Enum.Font.SourceSansBold
+toggleGuiButton.TextSize = 18
+
+-- Remove GUI Button (Hidden/Shown with GUI)
 local removeGuiButton = Instance.new("TextButton")
 removeGuiButton.Parent = screenGui
-removeGuiButton.Size = UDim2.new(0, 150, 0, 40)
-removeGuiButton.Position = UDim2.new(0.5, -75, 0.9, 0)
+removeGuiButton.Size = UDim2.new(0, 100, 0, 40)
+removeGuiButton.Position = UDim2.new(1, -110, 0, 10) -- Upper right corner
 removeGuiButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
 removeGuiButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 removeGuiButton.Text = "Remove GUI"
 removeGuiButton.Font = Enum.Font.SourceSansBold
-removeGuiButton.TextSize = 18
+removeGuiButton.TextSize = 16
+
+local noclipEnabled = false
+local guiVisible = true
 
 local function setNoclip(state)
     for _, part in pairs(character:GetDescendants()) do
         if part:IsA("BasePart") then
-            part.CanCollide = not state -- Full-body noclip
+            part.CanCollide = not state
         end
     end
 end
 
-local function setLegNoclipOnly()
-    for _, part in pairs(character:GetDescendants()) do
-        if part:IsA("BasePart") and part.Position.Y < rootPart.Position.Y - 2 then
-            part.CanCollide = false -- Only noclip parts below the HumanoidRootPart (legs)
-        else
-            part.CanCollide = true -- Enable collision for other parts
-        end
+local function toggleNoclip()
+    noclipEnabled = not noclipEnabled
+    setNoclip(noclipEnabled)
+    
+    if noclipEnabled then
+        noclipButton.Text = "Toggle Noclip (ON)"
+        noclipButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+    else
+        noclipButton.Text = "Toggle Noclip (OFF)"
+        noclipButton.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
     end
 end
 
--- Function to perform a smooth leap
 local function superLeap()
     if humanoid and rootPart then
-        setNoclip(true) -- Full noclip
+        setNoclip(true)
 
-        local leapForce = Vector3.new(0, 120, 0) -- Leap height
-        local forwardForce = rootPart.CFrame.LookVector * 250 -- Move forward
+        local leapForce = Vector3.new(0, 120, 0)
+        local forwardForce = rootPart.CFrame.LookVector * 250
         rootPart.Velocity = forwardForce + leapForce
 
-        -- Smooth arc-like leap (gradually slows upward movement)
         for i = 1, 15 do
-            rootPart.Velocity = rootPart.Velocity - Vector3.new(0, 3, 0) -- Reduce Y velocity slowly
+            rootPart.Velocity = rootPart.Velocity - Vector3.new(0, 3, 0)
             wait(0.1)
         end
 
-        -- Wait until player lands
         repeat wait(0.1) until humanoid.FloorMaterial ~= Enum.Material.Air
 
-        setLegNoclipOnly() -- Keep legs noclipped
+        setNoclip(noclipEnabled)
     end
 end
 
--- Function to remove the GUI
+local function toggleGUI()
+    guiVisible = not guiVisible
+    mainFrame.Visible = guiVisible
+    removeGuiButton.Visible = guiVisible
+
+    if guiVisible then
+        toggleGuiButton.Text = "Toggle GUI (Hide)"
+    else
+        toggleGuiButton.Text = "Toggle GUI (Show)"
+    end
+end
+
 local function removeGUI()
     screenGui:Destroy()
 end
 
--- Connect buttons to functions
 superLeapButton.MouseButton1Click:Connect(superLeap)
+noclipButton.MouseButton1Click:Connect(toggleNoclip)
+toggleGuiButton.MouseButton1Click:Connect(toggleGUI)
 removeGuiButton.MouseButton1Click:Connect(removeGUI)

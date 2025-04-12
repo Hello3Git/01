@@ -1,150 +1,95 @@
-local player = game:GetService("Players").LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local humanoid = character:FindFirstChildOfClass("Humanoid")
-local rootPart = character:FindFirstChild("HumanoidRootPart")
-local runService = game:GetService("RunService")
+local sausageHolder = game.CoreGui.TopBarApp.TopBarApp.UnibarLeftFrame.UnibarMenu["2"]
+local originalSize = sausageHolder.Size.X.Offset
+local sSize = UDim2.new(0, originalSize + 48, 0, sausageHolder.Size.Y.Offset)
 
--- Create GUI
-local screenGui = Instance.new("ScreenGui")
-screenGui.Parent = game.CoreGui
+local buttonFrame = Instance.new("Frame", sausageHolder)
+		buttonFrame.Size = UDim2.new(0, 48, 0, 44)
+		buttonFrame.BackgroundTransparency = 1
+		buttonFrame.BorderSizePixel = 0
+		buttonFrame.Position = UDim2.new(0, sausageHolder.Size.X.Offset - 48, 0, 0)
+local imageButton = Instance.new("ImageButton", buttonFrame)
+		imageButton.BackgroundTransparency = 1
+		imageButton.BorderSizePixel = 0
+		imageButton.Size = UDim2.new(0, 36, 0, 36)
+		imageButton.AnchorPoint = Vector2.new(0.5, 0.5)
+		imageButton.Position = UDim2.new(0.5, 0, 0.5, 0)
+		imageButton.Image = "http://www.roblox.com/asset/?id=131523679474566"
+local function FortniteFlips()
+		if FlipCooldown then
+			return
+		end
 
--- Main Container for Buttons
-local mainFrame = Instance.new("Frame")
-mainFrame.Parent = screenGui
-mainFrame.Size = UDim2.new(0, 250, 0, 150)
-mainFrame.Position = UDim2.new(0.5, -125, 0.8, -300)
-mainFrame.BackgroundTransparency = 1
+		FlipCooldown = true
+		local character = game:GetService("Players").LocalPlayer.Character
+		local hrp = character and character:FindFirstChild("HumanoidRootPart")
+		local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+		local animator = humanoid and humanoid:FindFirstChildOfClass("Animator")
+		if not hrp or not humanoid then
+			FlipCooldown = false
+			return
+		end
 
--- Super Leap Button
-local superLeapButton = Instance.new("TextButton")
-superLeapButton.Parent = mainFrame
-superLeapButton.Size = UDim2.new(0, 200, 0, 50)
-superLeapButton.Position = UDim2.new(0, 25, 0, 0)
-superLeapButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-superLeapButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-superLeapButton.Text = "Super Leap (Leg Noclip)"
-superLeapButton.Font = Enum.Font.SourceSansBold
-superLeapButton.TextSize = 18
+		local savedTracks = {}
 
--- Toggle Noclip Button
-local noclipButton = Instance.new("TextButton")
-noclipButton.Parent = mainFrame
-noclipButton.Size = UDim2.new(0, 200, 0, 50)
-noclipButton.Position = UDim2.new(0, 25, 0, 60)
-noclipButton.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
-noclipButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-noclipButton.Text = "Toggle Noclip (OFF)"
-noclipButton.Font = Enum.Font.SourceSansBold
-noclipButton.TextSize = 18
+		if animator then
+			for _, track in ipairs(animator:GetPlayingAnimationTracks()) do
+				savedTracks[#savedTracks + 1] = { track = track, time = track.TimePosition }
+				track:Stop(0)
+			end
+		end
 
--- Toggle GUI Button
-local toggleGuiButton = Instance.new("TextButton")
-toggleGuiButton.Parent = screenGui
-toggleGuiButton.Size = UDim2.new(0, 150, 0, 40)
-toggleGuiButton.Position = UDim2.new(0, 10, 0, 10)
-toggleGuiButton.BackgroundColor3 = Color3.fromRGB(255, 165, 0)
-toggleGuiButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-toggleGuiButton.Text = "Toggle GUI (Hide)"
-toggleGuiButton.Font = Enum.Font.SourceSansBold
-toggleGuiButton.TextSize = 18
+		humanoid:ChangeState(Enum.HumanoidStateType.Physics)
+		humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown, false)
+		humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall, false)
+		humanoid:SetStateEnabled(Enum.HumanoidStateType.Running, false)
+		humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, false)
+		humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing, false)
 
--- Remove GUI Button
-local removeGuiButton = Instance.new("TextButton")
-removeGuiButton.Parent = screenGui
-removeGuiButton.Size = UDim2.new(0, 100, 0, 40)
-removeGuiButton.Position = UDim2.new(1, -110, 0, 10)
-removeGuiButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-removeGuiButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-removeGuiButton.Text = "Remove GUI"
-removeGuiButton.Font = Enum.Font.SourceSansBold
-removeGuiButton.TextSize = 16
+		local duration = 0.45
+		local steps = 120
+		local startCFrame = hrp.CFrame
+		local forwardVector = startCFrame.LookVector
+		local upVector = Vector3.new(0, 1, 0)
+		task.spawn(function()
+			local startTime = tick()
+			for i = 1, steps do
+				local t = i / steps
+				local height = 4 * (t - t ^ 2) * 10
+				local nextPos = startCFrame.Position + forwardVector * (35 * t) + upVector * height
+				local rotation = startCFrame.Rotation * CFrame.Angles(-math.rad(i * (360 / steps)), 0, 0)
 
-local noclipEnabled = false
-local guiVisible = true
+				hrp.CFrame = CFrame.new(nextPos) * rotation
+				local elapsedTime = tick() - startTime
+				local expectedTime = (duration / steps) * i
+				local waitTime = expectedTime - elapsedTime
+				if waitTime > 0 then
+					task.wait(waitTime)
+				end
+			end
 
--- Permanent Leg Noclip
-local function setLegsNoclip()
-    if character then
-        for _, part in pairs(character:GetChildren()) do
-            if part:IsA("BasePart") and (
-                part.Name == "Left Leg" or part.Name == "Right Leg" or
-                part.Name == "LeftLowerLeg" or part.Name == "RightLowerLeg" or
-                part.Name == "LeftFoot" or part.Name == "RightFoot") then
-                part.CanCollide = false
-            end
-        end
-    end
+			hrp.CFrame = CFrame.new(startCFrame.Position + forwardVector * 35) * startCFrame.Rotation
+			humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown, true)
+			humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall, true)
+			humanoid:SetStateEnabled(Enum.HumanoidStateType.Running, true)
+			humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, true)
+			humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing, true)
+			humanoid:ChangeState(Enum.HumanoidStateType.Running)
+
+			if animator then
+				for _, data in ipairs(savedTracks) do
+					local track = data.track
+					track:Play()
+					track.TimePosition = data.time
+				end
+			end
+			task.wait(0.25)
+			FlipCooldown = false
+		end)
+	end
+
+imageButton.Activated:Connect(FortniteFlips)
+
+while task.wait(0.0000000001) do
+sausageHolder.Size = sSize
+buttonFrame.Position = UDim2.new(0, sausageHolder.Size.X.Offset - 48, 0, 0)
 end
-
-setLegsNoclip() -- Ensure legs are permanently noclipped at script start
-
--- Noclip Toggle Function (Runs Every Frame When Enabled)
-local function toggleNoclip()
-    noclipEnabled = not noclipEnabled
-
-    if noclipEnabled then
-        noclipButton.Text = "Toggle Noclip (ON)"
-        noclipButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
-
-        -- Continuous noclip
-        runService.RenderStepped:Connect(function()
-            if noclipEnabled and character then
-                for _, part in pairs(character:GetDescendants()) do
-                    if part:IsA("BasePart") then
-                        part.CanCollide = false
-                    end
-                end
-            end
-        end)
-    else
-        noclipButton.Text = "Toggle Noclip (OFF)"
-        noclipButton.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
-
-        -- Restore collision for all parts (except legs)
-        for _, part in pairs(character:GetDescendants()) do
-            if part:IsA("BasePart") and not (
-                part.Name == "Left Leg" or part.Name == "Right Leg" or
-                part.Name == "LeftLowerLeg" or part.Name == "RightLowerLeg" or
-                part.Name == "LeftFoot" or part.Name == "RightFoot") then
-                part.CanCollide = true
-            end
-        end
-    end
-end
-
--- Super Leap Function
-local function superLeap()
-    if humanoid and rootPart then
-        setLegsNoclip() -- Ensure legs stay noclipped
-
-        local leapForce = Vector3.new(0, 120, 0)
-        local forwardForce = rootPart.CFrame.LookVector * 250
-        rootPart.Velocity = forwardForce + leapForce
-
-        for i = 1, 15 do
-            rootPart.Velocity = rootPart.Velocity - Vector3.new(0, 3, 0)
-            wait(0.1)
-        end
-
-        repeat wait(0.1) until humanoid.FloorMaterial ~= Enum.Material.Air
-    end
-end
-
--- Toggle GUI Visibility
-local function toggleGUI()
-    guiVisible = not guiVisible
-    mainFrame.Visible = guiVisible
-    removeGuiButton.Visible = guiVisible
-
-    toggleGuiButton.Text = guiVisible and "Toggle GUI (Hide)" or "Toggle GUI (Show)"
-end
-
--- Remove GUI
-local function removeGUI()
-    screenGui:Destroy()
-end
-
-superLeapButton.MouseButton1Click:Connect(superLeap)
-noclipButton.MouseButton1Click:Connect(toggleNoclip)
-toggleGuiButton.MouseButton1Click:Connect(toggleGUI)
-removeGuiButton.MouseButton1Click:Connect(removeGUI)

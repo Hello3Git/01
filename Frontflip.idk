@@ -55,7 +55,7 @@ local function FortniteFlips()
 			for i = 1, steps do
 				local t = i / steps
 				local height = 4 * (t - t ^ 2) * 10
-				local nextPos = startCFrame.Position + forwardVector * (35 * t) + upVector * height
+				local nextPos = startCFrame.Position + forwardVector * (50 * t) + upVector * height
 				local rotation = startCFrame.Rotation * CFrame.Angles(-math.rad(i * (360 / steps)), 0, 0)
 
 				hrp.CFrame = CFrame.new(nextPos) * rotation

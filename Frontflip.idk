@@ -45,7 +45,7 @@ local function FortniteFlips()
 		humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, false)
 		humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing, false)
 
-		local duration = 0.45
+		local duration = 0.70
 		local steps = 150
 		local startCFrame = hrp.CFrame
 		local forwardVector = startCFrame.LookVector

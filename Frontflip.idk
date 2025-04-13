@@ -67,7 +67,7 @@ local function FortniteFlips()
 				end
 			end
 
-			hrp.CFrame = CFrame.new(startCFrame.Position + forwardVector * 35) * startCFrame.Rotation
+			hrp.CFrame = CFrame.new(startCFrame.Position + forwardVector * 50) * startCFrame.Rotation
 			humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown, true)
 			humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall, true)
 			humanoid:SetStateEnabled(Enum.HumanoidStateType.Running, true)

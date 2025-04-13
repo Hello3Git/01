@@ -46,7 +46,7 @@ local function FortniteFlips()
 		humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing, false)
 
 		local duration = 0.45
-		local steps = 120
+		local steps = 150
 		local startCFrame = hrp.CFrame
 		local forwardVector = startCFrame.LookVector
 		local upVector = Vector3.new(0, 1, 0)
@@ -54,7 +54,7 @@ local function FortniteFlips()
 			local startTime = tick()
 			for i = 1, steps do
 				local t = i / steps
-				local height = 4 * (t - t ^ 2) * 10
+				local height = 5 * (t - t ^ 2) * 12
 				local nextPos = startCFrame.Position + forwardVector * (50 * t) + upVector * height
 				local rotation = startCFrame.Rotation * CFrame.Angles(-math.rad(i * (360 / steps)), 0, 0)
 

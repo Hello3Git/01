@@ -13,7 +13,7 @@ local imageButton = Instance.new("ImageButton", buttonFrame)
 		imageButton.Size = UDim2.new(0, 36, 0, 36)
 		imageButton.AnchorPoint = Vector2.new(0.5, 0.5)
 		imageButton.Position = UDim2.new(0.5, 0, 0.5, 0)
-		imageButton.Image = "https://tr.rbxcdn.com/180DAY-09e8f28756fdc8e451fafdadb1476c88/420/420/Decal/Webp/noFilter"
+		imageButton.Image = "http://www.roblox.com/asset/?id=131523679474566"
 local function FortniteFlips()
 		if FlipCooldown then
 			return

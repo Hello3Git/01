@@ -1,0 +1,1939 @@
+local PLANTSEVOLUTIONMENU = Instance.new("ScreenGui")
+local Menu = Instance.new("Frame")
+local GODMODE = Instance.new("TextButton")
+local UICorner = Instance.new("UICorner")
+local GetAllRewards = Instance.new("TextButton")
+local UICorner_2 = Instance.new("UICorner")
+local GetAllRewardsStore = Instance.new("TextButton")
+local UICorner_3 = Instance.new("UICorner")
+local OpenAllGiftdsSPAM = Instance.new("TextButton")
+local UICorner_4 = Instance.new("UICorner")
+local SpamRewards = Instance.new("TextButton")
+local UICorner_5 = Instance.new("UICorner")
+local FASTAUTOATTCK = Instance.new("TextButton")
+local UICorner_6 = Instance.new("UICorner")
+local SpamRewardsStore = Instance.new("TextButton")
+local UICorner_7 = Instance.new("UICorner")
+local OpenAllGiftds = Instance.new("TextButton")
+local UICorner_8 = Instance.new("UICorner")
+local LEADERSTATSCHANGER = Instance.new("TextButton")
+local UICorner_9 = Instance.new("UICorner")
+local Re = Instance.new("TextButton")
+local UICorner_10 = Instance.new("UICorner")
+local BypassR = Instance.new("TextButton")
+local UICorner_11 = Instance.new("UICorner")
+local FORCETRADE = Instance.new("TextButton")
+local UICorner_12 = Instance.new("UICorner")
+local UICorner_13 = Instance.new("UICorner")
+local SpamXp = Instance.new("TextButton")
+local UICorner_14 = Instance.new("UICorner")
+local Farm = Instance.new("TextButton")
+local UICorner_15 = Instance.new("UICorner")
+local AreaTP = Instance.new("TextButton")
+local UICorner_16 = Instance.new("UICorner")
+local Potion = Instance.new("TextButton")
+local UICorner_17 = Instance.new("UICorner")
+local Dupe = Instance.new("TextButton")
+local UICorner_18 = Instance.new("UICorner")
+local TextButton = Instance.new("TextButton")
+local UICorner_19 = Instance.new("UICorner")
+local TextLabel = Instance.new("TextLabel")
+local TextLabel_2 = Instance.new("TextLabel")
+local BReward = Instance.new("Frame")
+local Back = Instance.new("TextButton")
+local UICorner_20 = Instance.new("UICorner")
+local GiftR = Instance.new("TextButton")
+local UICorner_21 = Instance.new("UICorner")
+local V = Instance.new("TextBox")
+local UICorner_22 = Instance.new("UICorner")
+local TextLabel_3 = Instance.new("TextLabel")
+local GiftRSp = Instance.new("TextButton")
+local UICorner_23 = Instance.new("UICorner")
+local UICorner_24 = Instance.new("UICorner")
+local ForceTrade = Instance.new("Frame")
+local Target = Instance.new("TextBox")
+local UICorner_25 = Instance.new("UICorner")
+local ForceTrade_2 = Instance.new("TextButton")
+local UICorner_26 = Instance.new("UICorner")
+local ScrollingFrame = Instance.new("ScrollingFrame")
+local UIListLayout = Instance.new("UIListLayout")
+local PlayerNameClone = Instance.new("TextButton")
+local Back_2 = Instance.new("TextButton")
+local UICorner_27 = Instance.new("UICorner")
+local UICorner_28 = Instance.new("UICorner")
+local LeaderStats = Instance.new("Frame")
+local Value = Instance.new("TextBox")
+local UICorner_29 = Instance.new("UICorner")
+local Back_3 = Instance.new("TextButton")
+local UICorner_30 = Instance.new("UICorner")
+local Gems = Instance.new("TextButton")
+local UICorner_31 = Instance.new("UICorner")
+local Wins = Instance.new("TextButton")
+local UICorner_32 = Instance.new("UICorner")
+local Reset = Instance.new("TextButton")
+local UICorner_33 = Instance.new("UICorner")
+local UICorner_34 = Instance.new("UICorner")
+local TextLabel_4 = Instance.new("TextLabel")
+local WorldTP = Instance.new("Frame")
+local UICorner_35 = Instance.new("UICorner")
+local World1 = Instance.new("TextButton")
+local UICorner_36 = Instance.new("UICorner")
+local World2 = Instance.new("TextButton")
+local UICorner_37 = Instance.new("UICorner")
+local World3 = Instance.new("TextButton")
+local UICorner_38 = Instance.new("UICorner")
+local World4 = Instance.new("TextButton")
+local UICorner_39 = Instance.new("UICorner")
+local Back_4 = Instance.new("TextButton")
+local UICorner_40 = Instance.new("UICorner")
+local Potion_2 = Instance.new("Frame")
+local Back_5 = Instance.new("TextButton")
+local UICorner_41 = Instance.new("UICorner")
+local RPot = Instance.new("TextButton")
+local UICorner_42 = Instance.new("UICorner")
+local RPotion = Instance.new("TextBox")
+local UICorner_43 = Instance.new("UICorner")
+local SRPot = Instance.new("TextButton")
+local UICorner_44 = Instance.new("UICorner")
+local UICorner_45 = Instance.new("UICorner")
+ 
+--Properties:
+ 
+PLANTSEVOLUTIONMENU.Name = "PLANTS EVOLUTION MENU"
+PLANTSEVOLUTIONMENU.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ 
+Menu.Name = "Menu"
+Menu.Parent = PLANTSEVOLUTIONMENU
+Menu.BackgroundColor3 = Color3.fromRGB(86, 86, 86)
+Menu.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Menu.BorderSizePixel = 0
+Menu.Position = UDim2.new(0.0790191591, 0, 0.0947075188, 0)
+Menu.Size = UDim2.new(0, 498, 0, 275)
+Menu.Visible = false
+ 
+GODMODE.Name = "GOD MODE"
+GODMODE.Parent = Menu
+GODMODE.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+GODMODE.BorderColor3 = Color3.fromRGB(0, 0, 0)
+GODMODE.BorderSizePixel = 0
+GODMODE.Position = UDim2.new(0.0300511159, 0, 0.83858186, 0)
+GODMODE.Size = UDim2.new(0, 108, 0, 34)
+GODMODE.Font = Enum.Font.Unknown
+GODMODE.Text = "GOD MODE"
+GODMODE.TextColor3 = Color3.fromRGB(255, 255, 255)
+GODMODE.TextScaled = true
+GODMODE.TextSize = 14.000
+GODMODE.TextStrokeTransparency = 0.000
+GODMODE.TextWrapped = true
+ 
+UICorner.Parent = GODMODE
+ 
+GetAllRewards.Name = "GetAllRewards"
+GetAllRewards.Parent = Menu
+GetAllRewards.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+GetAllRewards.BorderColor3 = Color3.fromRGB(0, 0, 0)
+GetAllRewards.BorderSizePixel = 0
+GetAllRewards.Position = UDim2.new(0.0300511159, 0, 0.628837645, 0)
+GetAllRewards.Size = UDim2.new(0, 108, 0, 34)
+GetAllRewards.Font = Enum.Font.Unknown
+GetAllRewards.Text = "GET ALL REWARDS"
+GetAllRewards.TextColor3 = Color3.fromRGB(255, 255, 255)
+GetAllRewards.TextScaled = true
+GetAllRewards.TextSize = 14.000
+GetAllRewards.TextStrokeTransparency = 0.000
+GetAllRewards.TextWrapped = true
+ 
+UICorner_2.Parent = GetAllRewards
+ 
+GetAllRewardsStore.Name = "GetAllRewardsStore"
+GetAllRewardsStore.Parent = Menu
+GetAllRewardsStore.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+GetAllRewardsStore.BorderColor3 = Color3.fromRGB(0, 0, 0)
+GetAllRewardsStore.BorderSizePixel = 0
+GetAllRewardsStore.Position = UDim2.new(0.272495449, 0, 0.439746767, 0)
+GetAllRewardsStore.Size = UDim2.new(0, 108, 0, 34)
+GetAllRewardsStore.Font = Enum.Font.Unknown
+GetAllRewardsStore.Text = "GET ALL REWARDS STORE"
+GetAllRewardsStore.TextColor3 = Color3.fromRGB(255, 255, 255)
+GetAllRewardsStore.TextScaled = true
+GetAllRewardsStore.TextSize = 14.000
+GetAllRewardsStore.TextStrokeTransparency = 0.000
+GetAllRewardsStore.TextWrapped = true
+ 
+UICorner_3.Parent = GetAllRewardsStore
+ 
+OpenAllGiftdsSPAM.Name = "Open All Giftds SPAM"
+OpenAllGiftdsSPAM.Parent = Menu
+OpenAllGiftdsSPAM.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+OpenAllGiftdsSPAM.BorderColor3 = Color3.fromRGB(0, 0, 0)
+OpenAllGiftdsSPAM.BorderSizePixel = 0
+OpenAllGiftdsSPAM.Position = UDim2.new(0.0300511159, 0, 0.0982730091, 0)
+OpenAllGiftdsSPAM.Size = UDim2.new(0, 108, 0, 34)
+OpenAllGiftdsSPAM.Font = Enum.Font.Unknown
+OpenAllGiftdsSPAM.Text = "SPAM OPEN ALL GIFT"
+OpenAllGiftdsSPAM.TextColor3 = Color3.fromRGB(255, 255, 255)
+OpenAllGiftdsSPAM.TextScaled = true
+OpenAllGiftdsSPAM.TextSize = 14.000
+OpenAllGiftdsSPAM.TextStrokeTransparency = 0.000
+OpenAllGiftdsSPAM.TextWrapped = true
+ 
+UICorner_4.Parent = OpenAllGiftdsSPAM
+ 
+SpamRewards.Name = "SpamRewards"
+SpamRewards.Parent = Menu
+SpamRewards.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+SpamRewards.BorderColor3 = Color3.fromRGB(0, 0, 0)
+SpamRewards.BorderSizePixel = 0
+SpamRewards.Position = UDim2.new(0.0300511159, 0, 0.439878494, 0)
+SpamRewards.Size = UDim2.new(0, 108, 0, 34)
+SpamRewards.Font = Enum.Font.Unknown
+SpamRewards.Text = "SPAM GET ALL REWARDS"
+SpamRewards.TextColor3 = Color3.fromRGB(255, 255, 255)
+SpamRewards.TextScaled = true
+SpamRewards.TextSize = 14.000
+SpamRewards.TextStrokeTransparency = 0.000
+SpamRewards.TextWrapped = true
+ 
+UICorner_5.Parent = SpamRewards
+ 
+FASTAUTOATTCK.Name = "FAST AUTO ATTCK"
+FASTAUTOATTCK.Parent = Menu
+FASTAUTOATTCK.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+FASTAUTOATTCK.BorderColor3 = Color3.fromRGB(0, 0, 0)
+FASTAUTOATTCK.BorderSizePixel = 0
+FASTAUTOATTCK.Position = UDim2.new(0.0300511159, 0, 0.264471978, 0)
+FASTAUTOATTCK.Size = UDim2.new(0, 108, 0, 34)
+FASTAUTOATTCK.Font = Enum.Font.Unknown
+FASTAUTOATTCK.Text = "FAST AUTO ATTACK"
+FASTAUTOATTCK.TextColor3 = Color3.fromRGB(255, 255, 255)
+FASTAUTOATTCK.TextScaled = true
+FASTAUTOATTCK.TextSize = 14.000
+FASTAUTOATTCK.TextStrokeTransparency = 0.000
+FASTAUTOATTCK.TextWrapped = true
+ 
+UICorner_6.Parent = FASTAUTOATTCK
+ 
+SpamRewardsStore.Name = "SpamRewardsStore"
+SpamRewardsStore.Parent = Menu
+SpamRewardsStore.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+SpamRewardsStore.BorderColor3 = Color3.fromRGB(0, 0, 0)
+SpamRewardsStore.BorderSizePixel = 0
+SpamRewardsStore.Position = UDim2.new(0.272495449, 0, 0.261696666, 0)
+SpamRewardsStore.Size = UDim2.new(0, 108, 0, 34)
+SpamRewardsStore.Font = Enum.Font.Unknown
+SpamRewardsStore.Text = "SPAM GET ALL REWARDS STORE"
+SpamRewardsStore.TextColor3 = Color3.fromRGB(255, 255, 255)
+SpamRewardsStore.TextScaled = true
+SpamRewardsStore.TextSize = 14.000
+SpamRewardsStore.TextStrokeTransparency = 0.000
+SpamRewardsStore.TextWrapped = true
+ 
+UICorner_7.Parent = SpamRewardsStore
+ 
+OpenAllGiftds.Name = "Open All Giftds"
+OpenAllGiftds.Parent = Menu
+OpenAllGiftds.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+OpenAllGiftds.BorderColor3 = Color3.fromRGB(0, 0, 0)
+OpenAllGiftds.BorderSizePixel = 0
+OpenAllGiftds.Position = UDim2.new(0.275681764, 0, 0.0971993208, 0)
+OpenAllGiftds.Size = UDim2.new(0, 108, 0, 34)
+OpenAllGiftds.Font = Enum.Font.Unknown
+OpenAllGiftds.Text = "OPEN ALL GIFT"
+OpenAllGiftds.TextColor3 = Color3.fromRGB(255, 255, 255)
+OpenAllGiftds.TextScaled = true
+OpenAllGiftds.TextSize = 14.000
+OpenAllGiftds.TextStrokeTransparency = 0.000
+OpenAllGiftds.TextWrapped = true
+ 
+UICorner_8.Parent = OpenAllGiftds
+ 
+LEADERSTATSCHANGER.Name = "LEADERSTATS CHANGER"
+LEADERSTATSCHANGER.Parent = Menu
+LEADERSTATSCHANGER.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+LEADERSTATSCHANGER.BorderColor3 = Color3.fromRGB(0, 0, 0)
+LEADERSTATSCHANGER.BorderSizePixel = 0
+LEADERSTATSCHANGER.Position = UDim2.new(0.524308503, 0, 0.0982730091, 0)
+LEADERSTATSCHANGER.Size = UDim2.new(0, 108, 0, 34)
+LEADERSTATSCHANGER.Font = Enum.Font.Unknown
+LEADERSTATSCHANGER.Text = "LEADERSTATS"
+LEADERSTATSCHANGER.TextColor3 = Color3.fromRGB(255, 255, 255)
+LEADERSTATSCHANGER.TextScaled = true
+LEADERSTATSCHANGER.TextSize = 14.000
+LEADERSTATSCHANGER.TextStrokeTransparency = 0.000
+LEADERSTATSCHANGER.TextWrapped = true
+ 
+UICorner_9.Parent = LEADERSTATSCHANGER
+ 
+Re.Name = "Re"
+Re.Parent = Menu
+Re.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+Re.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Re.BorderSizePixel = 0
+Re.Position = UDim2.new(0.272034436, 0, 0.836454868, 0)
+Re.Size = UDim2.new(0, 108, 0, 34)
+Re.Font = Enum.Font.Unknown
+Re.Text = "REBIRTH"
+Re.TextColor3 = Color3.fromRGB(255, 255, 255)
+Re.TextScaled = true
+Re.TextSize = 14.000
+Re.TextStrokeTransparency = 0.000
+Re.TextWrapped = true
+ 
+UICorner_10.Parent = Re
+ 
+BypassR.Name = "BypassR"
+BypassR.Parent = Menu
+BypassR.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+BypassR.BorderColor3 = Color3.fromRGB(0, 0, 0)
+BypassR.BorderSizePixel = 0
+BypassR.Position = UDim2.new(0.272495508, 0, 0.627672791, 0)
+BypassR.Size = UDim2.new(0, 108, 0, 34)
+BypassR.Font = Enum.Font.Unknown
+BypassR.Text = "BYPASS REWARD"
+BypassR.TextColor3 = Color3.fromRGB(255, 255, 255)
+BypassR.TextScaled = true
+BypassR.TextSize = 14.000
+BypassR.TextStrokeTransparency = 0.000
+BypassR.TextWrapped = true
+ 
+UICorner_11.Parent = BypassR
+ 
+FORCETRADE.Name = "FORCE TRADE"
+FORCETRADE.Parent = Menu
+FORCETRADE.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+FORCETRADE.BorderColor3 = Color3.fromRGB(0, 0, 0)
+FORCETRADE.BorderSizePixel = 0
+FORCETRADE.Position = UDim2.new(0.523224294, 0, 0.261909395, 0)
+FORCETRADE.Size = UDim2.new(0, 108, 0, 34)
+FORCETRADE.Font = Enum.Font.Unknown
+FORCETRADE.Text = "FORCE TRADE"
+FORCETRADE.TextColor3 = Color3.fromRGB(255, 255, 255)
+FORCETRADE.TextScaled = true
+FORCETRADE.TextSize = 14.000
+FORCETRADE.TextStrokeTransparency = 0.000
+FORCETRADE.TextWrapped = true
+ 
+UICorner_12.Parent = FORCETRADE
+ 
+UICorner_13.Parent = Menu
+ 
+SpamXp.Name = "SpamXp"
+SpamXp.Parent = Menu
+SpamXp.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+SpamXp.BorderColor3 = Color3.fromRGB(0, 0, 0)
+SpamXp.BorderSizePixel = 0
+SpamXp.Position = UDim2.new(0.523224294, 0, 0.436454862, 0)
+SpamXp.Size = UDim2.new(0, 108, 0, 34)
+SpamXp.Font = Enum.Font.Unknown
+SpamXp.Text = "SPAM XP"
+SpamXp.TextColor3 = Color3.fromRGB(255, 255, 255)
+SpamXp.TextScaled = true
+SpamXp.TextSize = 14.000
+SpamXp.TextStrokeTransparency = 0.000
+SpamXp.TextWrapped = true
+ 
+UICorner_14.Parent = SpamXp
+ 
+Farm.Name = "Farm"
+Farm.Parent = Menu
+Farm.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+Farm.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Farm.BorderSizePixel = 0
+Farm.Position = UDim2.new(0.523224294, 0, 0.62554574, 0)
+Farm.Size = UDim2.new(0, 108, 0, 34)
+Farm.Font = Enum.Font.Unknown
+Farm.Text = "FARM"
+Farm.TextColor3 = Color3.fromRGB(255, 255, 255)
+Farm.TextScaled = true
+Farm.TextSize = 14.000
+Farm.TextStrokeTransparency = 0.000
+Farm.TextWrapped = true
+ 
+UICorner_15.Parent = Farm
+ 
+AreaTP.Name = "AreaTP"
+AreaTP.Parent = Menu
+AreaTP.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+AreaTP.BorderColor3 = Color3.fromRGB(0, 0, 0)
+AreaTP.BorderSizePixel = 0
+AreaTP.Position = UDim2.new(0.523224294, 0, 0.836454868, 0)
+AreaTP.Size = UDim2.new(0, 108, 0, 34)
+AreaTP.Font = Enum.Font.Unknown
+AreaTP.Text = "AREA TP"
+AreaTP.TextColor3 = Color3.fromRGB(255, 255, 255)
+AreaTP.TextScaled = true
+AreaTP.TextSize = 14.000
+AreaTP.TextStrokeTransparency = 0.000
+AreaTP.TextWrapped = true
+ 
+UICorner_16.Parent = AreaTP
+ 
+Potion.Name = "Potion"
+Potion.Parent = Menu
+Potion.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+Potion.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Potion.BorderSizePixel = 0
+Potion.Position = UDim2.new(0.763264298, 0, 0.0982730091, 0)
+Potion.Size = UDim2.new(0, 108, 0, 34)
+Potion.Font = Enum.Font.Unknown
+Potion.Text = "POTION"
+Potion.TextColor3 = Color3.fromRGB(255, 255, 255)
+Potion.TextScaled = true
+Potion.TextSize = 14.000
+Potion.TextStrokeTransparency = 0.000
+Potion.TextWrapped = true
+ 
+UICorner_17.Parent = Potion
+ 
+Dupe.Name = "Dupe"
+Dupe.Parent = Menu
+Dupe.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+Dupe.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Dupe.BorderSizePixel = 0
+Dupe.Position = UDim2.new(0.763264358, 0, 0.258273005, 0)
+Dupe.Size = UDim2.new(0, 108, 0, 34)
+Dupe.Font = Enum.Font.Unknown
+Dupe.Text = "DUPE"
+Dupe.TextColor3 = Color3.fromRGB(255, 255, 255)
+Dupe.TextScaled = true
+Dupe.TextSize = 14.000
+Dupe.TextStrokeTransparency = 0.000
+Dupe.TextWrapped = true
+ 
+UICorner_18.Parent = Dupe
+ 
+TextButton.Parent = PLANTSEVOLUTIONMENU
+TextButton.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextButton.BorderSizePixel = 0
+TextButton.Position = UDim2.new(0.416088641, 0, 0.805267274, 0)
+TextButton.Size = UDim2.new(0, 123, 0, 34)
+TextButton.Font = Enum.Font.Unknown
+TextButton.Text = "DEBUG PVZ"
+TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.TextScaled = true
+TextButton.TextSize = 14.000
+TextButton.TextStrokeTransparency = 0.000
+TextButton.TextWrapped = true
+ 
+UICorner_19.Parent = TextButton
+ 
+TextLabel.Parent = PLANTSEVOLUTIONMENU
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(0.256130785, 0, 0.300835669, 0)
+TextLabel.Size = UDim2.new(0, 357, 0, 91)
+TextLabel.Font = Enum.Font.Unknown
+TextLabel.Text = "MADE BY     R0101010101011010  "
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14.000
+TextLabel.TextStrokeTransparency = 0.000
+TextLabel.TextWrapped = true
+ 
+TextLabel_2.Parent = PLANTSEVOLUTIONMENU
+TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.BackgroundTransparency = 1.000
+TextLabel_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_2.BorderSizePixel = 0
+TextLabel_2.Position = UDim2.new(0.264305174, 0, 0.504178286, 0)
+TextLabel_2.Size = UDim2.new(0, 316, 0, 57)
+TextLabel_2.Font = Enum.Font.Unknown
+TextLabel_2.Text = "AND JIMALLOP300"
+TextLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.TextScaled = true
+TextLabel_2.TextSize = 14.000
+TextLabel_2.TextStrokeTransparency = 0.000
+TextLabel_2.TextWrapped = true
+ 
+BReward.Name = "BReward"
+BReward.Parent = PLANTSEVOLUTIONMENU
+BReward.BackgroundColor3 = Color3.fromRGB(86, 86, 86)
+BReward.BorderColor3 = Color3.fromRGB(0, 0, 0)
+BReward.BorderSizePixel = 0
+BReward.Position = UDim2.new(0.349000007, 0, 0.233999997, 0)
+BReward.Size = UDim2.new(0, 255, 0, 192)
+BReward.Visible = false
+ 
+Back.Name = "Back"
+Back.Parent = BReward
+Back.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+Back.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Back.BorderSizePixel = 0
+Back.Position = UDim2.new(0.290196091, 0, 0.820271909, 0)
+Back.Size = UDim2.new(0, 97, 0, 28)
+Back.Font = Enum.Font.SourceSansBold
+Back.Text = "BACK"
+Back.TextColor3 = Color3.fromRGB(255, 255, 255)
+Back.TextScaled = true
+Back.TextSize = 14.000
+Back.TextStrokeTransparency = 0.000
+Back.TextWrapped = true
+ 
+UICorner_20.Parent = Back
+ 
+GiftR.Name = "GiftR"
+GiftR.Parent = BReward
+GiftR.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+GiftR.BorderColor3 = Color3.fromRGB(0, 0, 0)
+GiftR.BorderSizePixel = 0
+GiftR.Position = UDim2.new(0.0509803928, 0, 0.460527271, 0)
+GiftR.Size = UDim2.new(0, 100, 0, 28)
+GiftR.Font = Enum.Font.SourceSansBold
+GiftR.Text = "GIFT REWARD"
+GiftR.TextColor3 = Color3.fromRGB(255, 255, 255)
+GiftR.TextScaled = true
+GiftR.TextSize = 14.000
+GiftR.TextStrokeTransparency = 0.000
+GiftR.TextWrapped = true
+ 
+UICorner_21.Parent = GiftR
+ 
+V.Name = "V"
+V.Parent = BReward
+V.BackgroundColor3 = Color3.fromRGB(53, 53, 53)
+V.BorderColor3 = Color3.fromRGB(0, 0, 0)
+V.BorderSizePixel = 0
+V.Position = UDim2.new(0.16648823, 0, 0.209924221, 0)
+V.Size = UDim2.new(0, 163, 0, 33)
+V.Size = UDim2.new(0, 163, 0, 33)
+V.Font = Enum.Font.Unknown
+V.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+V.PlaceholderText = "VALUE"
+V.Text = ""
+V.TextColor3 = Color3.fromRGB(255, 255, 255)
+V.TextScaled = true
+V.TextSize = 14.000
+V.TextStrokeTransparency = 0.000
+V.TextWrapped = true
+ 
+UICorner_22.Parent = V
+ 
+TextLabel_3.Parent = BReward
+TextLabel_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_3.BackgroundTransparency = 1.000
+TextLabel_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_3.BorderSizePixel = 0
+TextLabel_3.Position = UDim2.new(0.247058824, 0, 0.640625, 0)
+TextLabel_3.Size = UDim2.new(0, 115, 0, 34)
+TextLabel_3.Font = Enum.Font.SourceSansBold
+TextLabel_3.Text = "1-12"
+TextLabel_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_3.TextScaled = true
+TextLabel_3.TextSize = 14.000
+TextLabel_3.TextStrokeTransparency = 0.000
+TextLabel_3.TextWrapped = true
+ 
+GiftRSp.Name = "GiftRSp"
+GiftRSp.Parent = BReward
+GiftRSp.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+GiftRSp.BorderColor3 = Color3.fromRGB(0, 0, 0)
+GiftRSp.BorderSizePixel = 0
+GiftRSp.Position = UDim2.new(0.498573929, 0, 0.460527271, 0)
+GiftRSp.Size = UDim2.new(0, 114, 0, 28)
+GiftRSp.Font = Enum.Font.SourceSansBold
+GiftRSp.Text = "SPAM GIFT REWARD"
+GiftRSp.TextColor3 = Color3.fromRGB(255, 255, 255)
+GiftRSp.TextScaled = true
+GiftRSp.TextSize = 14.000
+GiftRSp.TextStrokeTransparency = 0.000
+GiftRSp.TextWrapped = true
+ 
+UICorner_23.Parent = GiftRSp
+ 
+UICorner_24.Parent = BReward
+ 
+ForceTrade.Name = "ForceTrade"
+ForceTrade.Parent = PLANTSEVOLUTIONMENU
+ForceTrade.BackgroundColor3 = Color3.fromRGB(86, 86, 86)
+ForceTrade.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ForceTrade.BorderSizePixel = 0
+ForceTrade.Position = UDim2.new(0.349000007, 0, 0.233999997, 0)
+ForceTrade.Size = UDim2.new(0, 255, 0, 188)
+ForceTrade.Visible = false
+ 
+Target.Name = "Target"
+Target.Parent = ForceTrade
+Target.BackgroundColor3 = Color3.fromRGB(49, 49, 49)
+Target.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Target.BorderSizePixel = 0
+Target.Position = UDim2.new(0.56078434, 0, 0.138297871, 0)
+Target.Size = UDim2.new(0, 93, 0, 31)
+Target.Font = Enum.Font.SourceSansBold
+Target.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+Target.PlaceholderText = "PLAYER NAME"
+Target.Text = ""
+Target.TextColor3 = Color3.fromRGB(255, 255, 255)
+Target.TextScaled = true
+Target.TextSize = 14.000
+Target.TextStrokeTransparency = 0.000
+Target.TextWrapped = true
+ 
+UICorner_25.Parent = Target
+ 
+ForceTrade_2.Name = "ForceTrade"
+ForceTrade_2.Parent = ForceTrade
+ForceTrade_2.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+ForceTrade_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ForceTrade_2.BorderSizePixel = 0
+ForceTrade_2.Position = UDim2.new(0.588235199, 0, 0.409574479, 0)
+ForceTrade_2.Size = UDim2.new(0, 78, 0, 28)
+ForceTrade_2.Font = Enum.Font.SourceSansBold
+ForceTrade_2.Text = "START"
+ForceTrade_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+ForceTrade_2.TextScaled = true
+ForceTrade_2.TextSize = 14.000
+ForceTrade_2.TextStrokeTransparency = 0.000
+ForceTrade_2.TextWrapped = true
+ 
+UICorner_26.Parent = ForceTrade_2
+ 
+ScrollingFrame.Parent = ForceTrade
+ScrollingFrame.Active = true
+ScrollingFrame.BackgroundColor3 = Color3.fromRGB(71, 71, 71)
+ScrollingFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ScrollingFrame.BorderSizePixel = 0
+ScrollingFrame.Position = UDim2.new(0.0313721895, 0, 0.0212765951, 0)
+ScrollingFrame.Size = UDim2.new(0, 127, 0, 174)
+ 
+UIListLayout.Parent = ScrollingFrame
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+ 
+PlayerNameClone.Name = "PlayerNameClone"
+PlayerNameClone.Parent = ForceTrade
+PlayerNameClone.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+PlayerNameClone.BorderColor3 = Color3.fromRGB(0, 0, 0)
+PlayerNameClone.BorderSizePixel = 0
+PlayerNameClone.Position = UDim2.new(0.638868928, 0, 0, 0)
+PlayerNameClone.Size = UDim2.new(0, 118, 0, 37)
+PlayerNameClone.Visible = false
+PlayerNameClone.Font = Enum.Font.SourceSansBold
+PlayerNameClone.Text = "PLAYER NAME"
+PlayerNameClone.TextColor3 = Color3.fromRGB(255, 255, 255)
+PlayerNameClone.TextScaled = true
+PlayerNameClone.TextSize = 14.000
+PlayerNameClone.TextStrokeTransparency = 0.000
+PlayerNameClone.TextWrapped = true
+ 
+Back_2.Name = "Back"
+Back_2.Parent = ForceTrade
+Back_2.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+Back_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Back_2.BorderSizePixel = 0
+Back_2.Position = UDim2.new(0.588235199, 0, 0.643617034, 0)
+Back_2.Size = UDim2.new(0, 78, 0, 28)
+Back_2.Font = Enum.Font.SourceSansBold
+Back_2.Text = "BACK"
+Back_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+Back_2.TextScaled = true
+Back_2.TextSize = 14.000
+Back_2.TextStrokeTransparency = 0.000
+Back_2.TextWrapped = true
+ 
+UICorner_27.Parent = Back_2
+ 
+UICorner_28.Parent = ForceTrade
+ 
+LeaderStats.Name = "LeaderStats"
+LeaderStats.Parent = PLANTSEVOLUTIONMENU
+LeaderStats.BackgroundColor3 = Color3.fromRGB(86, 86, 86)
+LeaderStats.BorderColor3 = Color3.fromRGB(0, 0, 0)
+LeaderStats.BorderSizePixel = 0
+LeaderStats.Position = UDim2.new(0.349100858, 0, 0.233779907, 0)
+LeaderStats.Size = UDim2.new(0, 255, 0, 188)
+LeaderStats.Visible = false
+ 
+Value.Name = "Value"
+Value.Parent = LeaderStats
+Value.BackgroundColor3 = Color3.fromRGB(53, 53, 53)
+Value.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Value.BorderSizePixel = 0
+Value.Position = UDim2.new(0.170409799, 0, 0.189090908, 0)
+Value.Size = UDim2.new(0, 163, 0, 33)
+Value.Font = Enum.Font.Unknown
+Value.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+Value.PlaceholderText = "VALUE"
+Value.Text = ""
+Value.TextColor3 = Color3.fromRGB(255, 255, 255)
+Value.TextScaled = true
+Value.TextSize = 14.000
+Value.TextStrokeTransparency = 0.000
+Value.TextWrapped = true
+ 
+UICorner_29.Parent = Value
+ 
+Back_3.Name = "Back"
+Back_3.Parent = LeaderStats
+Back_3.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+Back_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Back_3.BorderSizePixel = 0
+Back_3.Position = UDim2.new(0.298039228, 0, 0.848751485, 0)
+Back_3.Size = UDim2.new(0, 97, 0, 28)
+Back_3.Font = Enum.Font.SourceSansBold
+Back_3.Text = "BACK"
+Back_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+Back_3.TextScaled = true
+Back_3.TextSize = 14.000
+Back_3.TextStrokeTransparency = 0.000
+Back_3.TextWrapped = true
+ 
+UICorner_30.Parent = Back_3
+ 
+Gems.Name = "Gems"
+Gems.Parent = LeaderStats
+Gems.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+Gems.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Gems.BorderSizePixel = 0
+Gems.Position = UDim2.new(0.525490224, 0, 0.467214078, 0)
+Gems.Size = UDim2.new(0, 97, 0, 28)
+Gems.Font = Enum.Font.SourceSansBold
+Gems.Text = "GEMS"
+Gems.TextColor3 = Color3.fromRGB(255, 255, 255)
+Gems.TextScaled = true
+Gems.TextSize = 14.000
+Gems.TextStrokeTransparency = 0.000
+Gems.TextWrapped = true
+ 
+UICorner_31.Parent = Gems
+ 
+Wins.Name = "Wins"
+Wins.Parent = LeaderStats
+Wins.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+Wins.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Wins.BorderSizePixel = 0
+Wins.Position = UDim2.new(0.0588235296, 0, 0.460762471, 0)
+Wins.Size = UDim2.new(0, 97, 0, 28)
+Wins.Font = Enum.Font.SourceSansBold
+Wins.Text = "WINS"
+Wins.TextColor3 = Color3.fromRGB(255, 255, 255)
+Wins.TextScaled = true
+Wins.TextSize = 14.000
+Wins.TextStrokeTransparency = 0.000
+Wins.TextWrapped = true
+ 
+UICorner_32.Parent = Wins
+ 
+Reset.Name = "Reset"
+Reset.Parent = LeaderStats
+Reset.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+Reset.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Reset.BorderSizePixel = 0
+Reset.Position = UDim2.new(0.298039228, 0, 0.662890077, 0)
+Reset.Size = UDim2.new(0, 97, 0, 28)
+Reset.Font = Enum.Font.SourceSansBold
+Reset.Text = "RESET"
+Reset.TextColor3 = Color3.fromRGB(255, 255, 255)
+Reset.TextScaled = true
+Reset.TextSize = 14.000
+Reset.TextStrokeTransparency = 0.000
+Reset.TextWrapped = true
+ 
+UICorner_33.Parent = Reset
+ 
+UICorner_34.Parent = LeaderStats
+ 
+TextLabel_4.Parent = PLANTSEVOLUTIONMENU
+TextLabel_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_4.BackgroundTransparency = 1.000
+TextLabel_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_4.BorderSizePixel = 0
+TextLabel_4.Position = UDim2.new(0, 0, 0.860724211, 0)
+TextLabel_4.Size = UDim2.new(0, 150, 0, 50)
+TextLabel_4.Font = Enum.Font.Unknown
+TextLabel_4.Text = "V0.2 BETA"
+TextLabel_4.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_4.TextScaled = true
+TextLabel_4.TextSize = 14.000
+TextLabel_4.TextStrokeTransparency = 0.000
+TextLabel_4.TextWrapped = true
+ 
+WorldTP.Name = "WorldTP"
+WorldTP.Parent = PLANTSEVOLUTIONMENU
+WorldTP.BackgroundColor3 = Color3.fromRGB(86, 86, 86)
+WorldTP.BorderColor3 = Color3.fromRGB(0, 0, 0)
+WorldTP.BorderSizePixel = 0
+WorldTP.Position = UDim2.new(0.349000007, 0, 0.234000072, 0)
+WorldTP.Size = UDim2.new(0, 255, 0, 224)
+WorldTP.Visible = false
+ 
+UICorner_35.Parent = WorldTP
+ 
+World1.Name = "World1"
+World1.Parent = WorldTP
+World1.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+World1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+World1.BorderSizePixel = 0
+World1.Position = UDim2.new(0.0823529437, 0, 0.0416666679, 0)
+World1.Size = UDim2.new(0, 200, 0, 34)
+World1.Font = Enum.Font.SourceSansBold
+World1.Text = "WORLD 1"
+World1.TextColor3 = Color3.fromRGB(255, 255, 255)
+World1.TextScaled = true
+World1.TextSize = 14.000
+World1.TextStrokeTransparency = 0.000
+World1.TextWrapped = true
+ 
+UICorner_36.Parent = World1
+ 
+World2.Name = "World2"
+World2.Parent = WorldTP
+World2.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+World2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+World2.BorderSizePixel = 0
+World2.Position = UDim2.new(0.0823529437, 0, 0.232142851, 0)
+World2.Size = UDim2.new(0, 200, 0, 34)
+World2.Font = Enum.Font.SourceSansBold
+World2.Text = "WORLD 2"
+World2.TextColor3 = Color3.fromRGB(255, 255, 255)
+World2.TextScaled = true
+World2.TextSize = 14.000
+World2.TextStrokeTransparency = 0.000
+World2.TextWrapped = true
+ 
+UICorner_37.Parent = World2
+ 
+World3.Name = "World3"
+World3.Parent = WorldTP
+World3.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+World3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+World3.BorderSizePixel = 0
+World3.Size = UDim2.new(0, 200, 0, 34)
+World3.Font = Enum.Font.SourceSansBold
+World3.Text = "WORLD 3"
+World3.TextColor3 = Color3.fromRGB(255, 255, 255)
+World3.TextScaled = true
+World3.TextSize = 14.000
+World3.TextStrokeTransparency = 0.000
+World3.TextWrapped = true
+ 
+UICorner_38.Parent = World3
+ 
+World4.Name = "World4"
+World4.Parent = WorldTP
+World4.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+World4.BorderColor3 = Color3.fromRGB(0, 0, 0)
+World4.BorderSizePixel = 0
+World4.Position = UDim2.new(0.0823529437, 0, 0.622023761, 0)
+World4.Size = UDim2.new(0, 200, 0, 34)
+World4.Font = Enum.Font.SourceSansBold
+World4.Text = "WORLD 4"
+World4.TextColor3 = Color3.fromRGB(255, 255, 255)
+World4.TextScaled = true
+World4.TextSize = 14.000
+World4.TextStrokeTransparency = 0.000
+World4.TextWrapped = true
+ 
+UICorner_39.Parent = World4
+ 
+Back_4.Name = "Back"
+Back_4.Parent = WorldTP
+Back_4.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+Back_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Back_4.BorderSizePixel = 0
+Back_4.Position = UDim2.new(0.0823529437, 0, 0.809523761, 0)
+Back_4.Size = UDim2.new(0, 200, 0, 34)
+Back_4.Font = Enum.Font.SourceSansBold
+Back_4.Text = "BACK"
+Back_4.TextColor3 = Color3.fromRGB(255, 255, 255)
+Back_4.TextScaled = true
+Back_4.TextSize = 14.000
+Back_4.TextStrokeTransparency = 0.000
+Back_4.TextWrapped = true
+ 
+UICorner_40.Parent = Back_4
+ 
+Potion_2.Name = "Potion"
+Potion_2.Parent = PLANTSEVOLUTIONMENU
+Potion_2.BackgroundColor3 = Color3.fromRGB(86, 86, 86)
+Potion_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Potion_2.BorderSizePixel = 0
+Potion_2.Position = UDim2.new(0.349000007, 0, 0.233999997, 0)
+Potion_2.Size = UDim2.new(0, 255, 0, 192)
+Potion_2.Visible = false
+ 
+Back_5.Name = "Back"
+Back_5.Parent = Potion_2
+Back_5.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+Back_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Back_5.BorderSizePixel = 0
+Back_5.Position = UDim2.new(0.290196091, 0, 0.820271909, 0)
+Back_5.Size = UDim2.new(0, 97, 0, 28)
+Back_5.Font = Enum.Font.SourceSansBold
+Back_5.Text = "BACK"
+Back_5.TextColor3 = Color3.fromRGB(255, 255, 255)
+Back_5.TextScaled = true
+Back_5.TextSize = 14.000
+Back_5.TextStrokeTransparency = 0.000
+Back_5.TextWrapped = true
+ 
+UICorner_41.Parent = Back_5
+ 
+RPot.Name = "RPot"
+RPot.Parent = Potion_2
+RPot.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+RPot.BorderColor3 = Color3.fromRGB(0, 0, 0)
+RPot.BorderSizePixel = 0
+RPot.Position = UDim2.new(0.0509803928, 0, 0.460527271, 0)
+RPot.Size = UDim2.new(0, 100, 0, 28)
+RPot.Font = Enum.Font.SourceSansBold
+RPot.Text = "RANDOM POTION"
+RPot.TextColor3 = Color3.fromRGB(255, 255, 255)
+RPot.TextScaled = true
+RPot.TextSize = 14.000
+RPot.TextStrokeTransparency = 0.000
+RPot.TextWrapped = true
+ 
+UICorner_42.Parent = RPot
+ 
+RPotion.Name = "RPotion"
+RPotion.Parent = Potion_2
+RPotion.BackgroundColor3 = Color3.fromRGB(53, 53, 53)
+RPotion.BorderColor3 = Color3.fromRGB(0, 0, 0)
+RPotion.BorderSizePixel = 0
+RPotion.Position = UDim2.new(0.16648823, 0, 0.209924221, 0)
+RPotion.Size = UDim2.new(0, 163, 0, 33)
+RPotion.Font = Enum.Font.Unknown
+RPotion.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+RPotion.PlaceholderText = "HOW MUCH"
+RPotion.Text = ""
+RPotion.TextColor3 = Color3.fromRGB(255, 255, 255)
+RPotion.TextScaled = true
+RPotion.TextSize = 14.000
+RPotion.TextStrokeTransparency = 0.000
+RPotion.TextWrapped = true
+ 
+UICorner_43.Parent = RPotion
+ 
+SRPot.Name = "SRPot"
+SRPot.Parent = Potion_2
+SRPot.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+SRPot.BorderColor3 = Color3.fromRGB(0, 0, 0)
+SRPot.BorderSizePixel = 0
+SRPot.Position = UDim2.new(0.498573929, 0, 0.460527271, 0)
+SRPot.Size = UDim2.new(0, 114, 0, 28)
+SRPot.Font = Enum.Font.SourceSansBold
+SRPot.Text = "SPAM RANDOM POTION"
+SRPot.TextColor3 = Color3.fromRGB(255, 255, 255)
+SRPot.TextScaled = true
+SRPot.TextSize = 14.000
+SRPot.TextStrokeTransparency = 0.000
+SRPot.TextWrapped = true
+ 
+UICorner_44.Parent = SRPot
+ 
+UICorner_45.Parent = Potion_2
+ 
+-- Scripts:
+ 
+local function MPESTOG_fake_script() -- GODMODE.LocalScript 
+    local script = Instance.new('LocalScript', GODMODE)
+ 
+    local godmode = false
+    
+    script.Parent.MouseButton1Click:Connect(function()
+        if godmode == false then
+            godmode = true
+            script.Parent.Text = "STOP"
+            repeat
+                task.wait()
+                local args = {
+                    [1] = game:GetService("Players").LocalPlayer
+                }
+    
+                game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("Pet"):WaitForChild("[C-S]SetPlayerHealth"):FireServer(unpack(args))
+            until godmode == false
+        else
+            script.Parent.Text = "GOD MODE"
+            godmode = false
+        end
+    end)
+end
+coroutine.wrap(MPESTOG_fake_script)()
+local function JAUDR_fake_script() -- GetAllRewards.LocalScript 
+    local script = Instance.new('LocalScript', GetAllRewards)
+ 
+    script.Parent.MouseButton1Click:Connect(function()
+        for i=1, 12 do
+            local args = {
+                [1] = i
+            }
+    
+            game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("TheEvent"):WaitForChild("[C-S]GetOnline5MinReward"):FireServer(unpack(args))
+        end
+    end)
+end
+coroutine.wrap(JAUDR_fake_script)()
+local function NBQZRYV_fake_script() -- GetAllRewardsStore.LocalScript 
+    local script = Instance.new('LocalScript', GetAllRewardsStore)
+ 
+    script.Parent.MouseButton1Click:Connect(function()
+        for i=1, 1000 do
+            wait()
+            local args = {
+                [1] = i
+            }
+    
+            game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("DailyOffer"):WaitForChild("[C-S]TryGetDailyOfferReward"):FireServer(unpack(args))
+        end
+    end)
+end
+coroutine.wrap(NBQZRYV_fake_script)()
+local function ICQOL_fake_script() -- OpenAllGiftdsSPAM.LocalScript 
+    local script = Instance.new('LocalScript', OpenAllGiftdsSPAM)
+ 
+    local giftspam = false
+    
+    script.Parent.MouseButton1Click:Connect(function()
+        if giftspam == false then
+            giftspam = true
+            script.Parent.Text = "STOP"
+            repeat
+                task.wait()
+                local args = {
+                    [1] = "Pool1",
+                    [2] = 1
+                }
+    
+                game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Function"):WaitForChild("Items"):WaitForChild("[C-S]PlayerTryDoLuck"):InvokeServer(unpack(args))
+    
+                local args = {
+                    [1] = "Pool2",
+                    [2] = 1
+                }
+    
+                game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Function"):WaitForChild("Items"):WaitForChild("[C-S]PlayerTryDoLuck"):InvokeServer(unpack(args))
+    
+                local args = {
+                    [1] = "pay2",
+                    [2] = 1
+                }
+    
+                game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Function"):WaitForChild("Items"):WaitForChild("[C-S]PlayerTryDoLuck"):InvokeServer(unpack(args))
+            until giftspam == false
+        else
+            script.Parent.Text = "SPAM OPEN ALL GIFT"
+            giftspam = false
+        end
+    end)
+end
+coroutine.wrap(ICQOL_fake_script)()
+local function JSCZSKL_fake_script() -- SpamRewards.LocalScript 
+    local script = Instance.new('LocalScript', SpamRewards)
+ 
+    local stop = false
+    
+    script.Parent.MouseButton1Click:Connect(function()
+        if stop == false then
+            stop = true
+            script.Parent.Text = "STOP"
+            repeat
+                task.wait(.2)
+                for i=1, 12 do
+                    local args = {
+                        [1] = i
+                    }
+    
+                    game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("TheEvent"):WaitForChild("[C-S]GetOnline5MinReward"):FireServer(unpack(args))
+                end
+            until stop == false
+        else
+            script.Parent.Text = "SPAM GET ALL REWARDS"
+            stop = false
+        end
+    end)
+end
+coroutine.wrap(JSCZSKL_fake_script)()
+local function UFLYXEJ_fake_script() -- FASTAUTOATTCK.LocalScript 
+    local script = Instance.new('LocalScript', FASTAUTOATTCK)
+ 
+    local autoattack = false
+    
+    script.Parent.MouseButton1Click:Connect(function()
+        if autoattack == false then
+            autoattack = true
+            script.Parent.Text = "STOP"
+            repeat
+                task.wait()
+                game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("Combat"):WaitForChild("M1"):FireServer()
+                game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("Combat"):WaitForChild("M1"):FireServer()
+                game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("Combat"):WaitForChild("M1"):FireServer()
+            until autoattack == false
+        else
+            script.Parent.Text = "FAST AUTO ATTACK"
+            autoattack = false
+        end
+    end)
+end
+coroutine.wrap(UFLYXEJ_fake_script)()
+local function TQAP_fake_script() -- SpamRewardsStore.LocalScript 
+    local script = Instance.new('LocalScript', SpamRewardsStore)
+ 
+    local stopSh = false
+    
+    script.Parent.MouseButton1Click:Connect(function()
+        if stopSh == false then
+            stopSh = true
+            script.Parent.Text = "STOP"
+            repeat
+                task.wait(.2)
+                for i=1, 1000 do
+                    wait(.1)
+                    local args = {
+                        [1] = i
+                    }
+    
+                    game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("DailyOffer"):WaitForChild("[C-S]TryGetDailyOfferReward"):FireServer(unpack(args))
+                end
+            until stopSh == false
+        else
+            script.Parent.Text = "SPAM GET ALL REWARDS STORE"
+            stopSh = false
+        end
+    end)
+end
+coroutine.wrap(TQAP_fake_script)()
+local function GBHCBI_fake_script() -- OpenAllGiftds.LocalScript 
+    local script = Instance.new('LocalScript', OpenAllGiftds)
+ 
+    script.Parent.MouseButton1Click:Connect(function()
+        local args = {
+            [1] = "Pool1",
+            [2] = 1
+        }
+    
+        game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Function"):WaitForChild("Items"):WaitForChild("[C-S]PlayerTryDoLuck"):InvokeServer(unpack(args))
+        
+        local args = {
+            [1] = "Pool2",
+            [2] = 1
+        }
+    
+        game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Function"):WaitForChild("Items"):WaitForChild("[C-S]PlayerTryDoLuck"):InvokeServer(unpack(args))
+        
+        local args = {
+            [1] = "pay2",
+            [2] = 1
+        }
+    
+        game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Function"):WaitForChild("Items"):WaitForChild("[C-S]PlayerTryDoLuck"):InvokeServer(unpack(args))
+    end)
+end
+coroutine.wrap(GBHCBI_fake_script)()
+local function OPXQMWF_fake_script() -- LEADERSTATSCHANGER.LocalScript 
+    local script = Instance.new('LocalScript', LEADERSTATSCHANGER)
+ 
+    script.Parent.MouseButton1Click:Connect(function()
+        script.Parent.Parent.Visible = false
+        script.Parent.Parent.Parent.LeaderStats.Visible = true
+    end)
+end
+coroutine.wrap(OPXQMWF_fake_script)()
+local function LOER_fake_script() -- Re.LocalScript 
+    local script = Instance.new('LocalScript', Re)
+ 
+    script.Parent.MouseButton1Click:Connect(function()
+        game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("Rebirth"):WaitForChild("[C-S]TryRebirth"):FireServer()
+    end)
+end
+coroutine.wrap(LOER_fake_script)()
+local function UFQW_fake_script() -- BypassR.LocalScript 
+    local script = Instance.new('LocalScript', BypassR)
+ 
+    script.Parent.MouseButton1Click:Connect(function()
+        script.Parent.Parent.Visible = false
+        script.Parent.Parent.Parent.BReward.Visible = true
+    end)
+end
+coroutine.wrap(UFQW_fake_script)()
+local function OQJOS_fake_script() -- Menu.UIDrag 
+    local script = Instance.new('LocalScript', Menu)
+ 
+    -- Made by Real_IceyDev (@lceyDex) --
+    -- Simple UI dragger (PC Only/Any device that has a mouse) --
+    
+    local UIS = game:GetService('UserInputService')
+    local frame = script.Parent
+    local dragToggle = nil
+    local dragSpeed = 0.25
+    local dragStart = nil
+    local startPos = nil
+    
+    local function updateInput(input)
+        local delta = input.Position - dragStart
+        local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
+            startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+        game:GetService('TweenService'):Create(frame, TweenInfo.new(dragSpeed), {Position = position}):Play()
+    end
+    
+    frame.InputBegan:Connect(function(input)
+        if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
+            dragToggle = true
+            dragStart = input.Position
+            startPos = frame.Position
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragToggle = false
+                end
+            end)
+        end
+    end)
+    
+    UIS.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+            if dragToggle then
+                updateInput(input)
+            end
+        end
+    end)
+end
+coroutine.wrap(OQJOS_fake_script)()
+local function JPXB_fake_script() -- FORCETRADE.LocalScript 
+    local script = Instance.new('LocalScript', FORCETRADE)
+ 
+    script.Parent.MouseButton1Click:Connect(function()
+        script.Parent.Parent.Visible = false
+        script.Parent.Parent.Parent.ForceTrade.Visible = true
+    end)
+end
+coroutine.wrap(JPXB_fake_script)()
+local function DNLXJO_fake_script() -- SpamXp.LocalScript 
+    local script = Instance.new('LocalScript', SpamXp)
+ 
+    local xpFarm = false
+    script.Parent.MouseButton1Click:Connect(function()
+        if xpFarm == false then
+            xpFarm = true
+            script.Parent.Text = "STOP"
+            repeat
+                task.wait(.1)
+                local args = {
+                    [1] = 5
+                }
+    
+                game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("TheEvent"):WaitForChild("[C-S]GetOnline5MinReward"):FireServer(unpack(args))
+    
+                local args = {
+                    [1] = 5
+                }
+    
+                game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("TheEvent"):WaitForChild("[C-S]GetOnline5MinReward"):FireServer(unpack(args))
+    
+                local args = {
+                    [1] = 5
+                }
+    
+                game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("TheEvent"):WaitForChild("[C-S]GetOnline5MinReward"):FireServer(unpack(args))
+    
+                local args = {
+                    [1] = 5
+                }
+    
+                game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("TheEvent"):WaitForChild("[C-S]GetOnline5MinReward"):FireServer(unpack(args))
+                
+                local args = {
+                    [1] = 5
+                }
+    
+                game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("TheEvent"):WaitForChild("[C-S]GetOnline5MinReward"):FireServer(unpack(args))
+    
+                local args = {
+                    [1] = 5
+                }
+    
+                game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("TheEvent"):WaitForChild("[C-S]GetOnline5MinReward"):FireServer(unpack(args))
+    
+                local args = {
+                    [1] = 5
+                }
+    
+                game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("TheEvent"):WaitForChild("[C-S]GetOnline5MinReward"):FireServer(unpack(args))
+    
+                local args = {
+                    [1] = 5
+                }
+    
+                game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("TheEvent"):WaitForChild("[C-S]GetOnline5MinReward"):FireServer(unpack(args))
+                
+                local args = {
+                    [1] = 5
+                }
+    
+                game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("TheEvent"):WaitForChild("[C-S]GetOnline5MinReward"):FireServer(unpack(args))
+    
+                local args = {
+                    [1] = 5
+                }
+    
+                game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("TheEvent"):WaitForChild("[C-S]GetOnline5MinReward"):FireServer(unpack(args))
+    
+                local args = {
+                    [1] = 5
+                }
+    
+                game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("TheEvent"):WaitForChild("[C-S]GetOnline5MinReward"):FireServer(unpack(args))
+    
+                local args = {
+                    [1] = 5
+                }
+    
+                game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("TheEvent"):WaitForChild("[C-S]GetOnline5MinReward"):FireServer(unpack(args))
+            until xpFarm == false
+        else
+            script.Parent.Text = "SPAM XP"
+            xpFarm = false
+        end
+    end)
+end
+coroutine.wrap(DNLXJO_fake_script)()
+local function YUGB_fake_script() -- Farm.LocalScript 
+    local script = Instance.new('LocalScript', Farm)
+ 
+    local farm = false
+    local oldPos = nil
+    script.Parent.MouseButton1Click:Connect(function()
+        for i,enemy in pairs(workspace.Enemys:GetChildren()) do
+            if farm == false then
+                oldPos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+                farm = true
+                script.Parent.Text = "STOP"
+                repeat
+                    task.wait()
+                    if enemy:GetAttribute("Health") == 0 then
+                    else
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = enemy.CFrame + Vector3.new(0,0.2,0)
+                    game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("Combat"):WaitForChild("M1"):FireServer()
+                    end
+                until farm == false
+            else
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = oldPos
+                script.Parent.Text = "FARM"
+                farm = false
+            end
+        end
+    end)
+end
+coroutine.wrap(YUGB_fake_script)()
+local function BZJYIS_fake_script() -- AreaTP.LocalScript 
+    local script = Instance.new('LocalScript', AreaTP)
+ 
+    script.Parent.MouseButton1Click:Connect(function()
+        script.Parent.Parent.Visible = false
+        script.Parent.Parent.Parent.WorldTP.Visible = true
+    end)
+end
+coroutine.wrap(BZJYIS_fake_script)()
+local function GNDUQZQ_fake_script() -- Potion.LocalScript 
+    local script = Instance.new('LocalScript', Potion)
+ 
+    script.Parent.MouseButton1Click:Connect(function()
+        script.Parent.Parent.Visible = false
+        script.Parent.Parent.Parent.Potion.Visible = true
+    end)
+end
+coroutine.wrap(GNDUQZQ_fake_script)()
+local function YCVFK_fake_script() -- Dupe.LocalScript 
+    local script = Instance.new('LocalScript', Dupe)
+ 
+    script.Parent.MouseButton1Click:Connect(function()
+        local args = {
+            [1] = game:GetService("Players").LocalPlayer
+        }
+    
+        game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("Trade"):WaitForChild("[C-S]AcceptTradeRequst"):FireServer(unpack(args))
+        wait()
+        script.Parent.Parent.Visible = false
+        local Hint = Instance.new("Hint")
+        Hint.Parent = workspace
+        Hint.Text = "Place all your pets"
+        wait(3)
+        Hint.Text = "Click Ready, Wait"
+        wait(3)
+        Hint.Text = "Then Click Cancel"
+        wait(3)
+        Hint.Text = "Pets duped"
+        wait(2)
+        Hint:Destroy()
+        script.Parent.Parent.Visible = true
+    end)
+end
+coroutine.wrap(YCVFK_fake_script)()
+local function EOWCB_fake_script() -- TextButton.LocalScript 
+    local script = Instance.new('LocalScript', TextButton)
+ 
+    script.Parent.MouseButton1Click:Connect(function()
+        if script.Parent.Parent.BReward.Visible == true or script.Parent.Parent.LeaderStats.Visible == true or script.Parent.Parent.ForceTrade.Visible == true or script.Parent.Parent.WorldTP.Visible == true or workspace:FindFirstChild("Hint") then
+        else
+            if script.Parent.Parent.Menu.Visible == false then
+                script.Parent.Parent.Menu.Visible = true
+                script.Parent.Text = "CLOSE"
+                script.Parent.BackgroundColor3 = Color3.new(1, 0, 0)
+            else
+                script.Parent.Parent.Menu.Visible = false
+                script.Parent.Text = "DEBUG PVZ"
+                script.Parent.BackgroundColor3 = Color3.new(0, 0.666667, 0)
+            end
+        end
+    end)
+end
+coroutine.wrap(EOWCB_fake_script)()
+local function ZCAKA_fake_script() -- TextButton.UIDrag 
+    local script = Instance.new('LocalScript', TextButton)
+ 
+    -- Made by Real_IceyDev (@lceyDex) --
+    -- Simple UI dragger (PC Only/Any device that has a mouse) --
+    
+    local UIS = game:GetService('UserInputService')
+    local frame = script.Parent
+    local dragToggle = nil
+    local dragSpeed = 0.25
+    local dragStart = nil
+    local startPos = nil
+    
+    local function updateInput(input)
+        local delta = input.Position - dragStart
+        local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
+            startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+        game:GetService('TweenService'):Create(frame, TweenInfo.new(dragSpeed), {Position = position}):Play()
+    end
+    
+    frame.InputBegan:Connect(function(input)
+        if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
+            dragToggle = true
+            dragStart = input.Position
+            startPos = frame.Position
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragToggle = false
+                end
+            end)
+        end
+    end)
+    
+    UIS.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+            if dragToggle then
+                updateInput(input)
+            end
+        end
+    end)
+end
+coroutine.wrap(ZCAKA_fake_script)()
+local function VTBD_fake_script() -- TextLabel.LocalScript 
+    local script = Instance.new('LocalScript', TextLabel)
+ 
+    wait(0.7)
+    repeat
+        wait(.1)
+        script.Parent.TextTransparency += .1
+    until script.Parent.TextTransparency == 1
+    script.Parent:Destroy()
+end
+coroutine.wrap(VTBD_fake_script)()
+local function AKZW_fake_script() -- TextLabel_2.LocalScript 
+    local script = Instance.new('LocalScript', TextLabel_2)
+ 
+    wait(0.7)
+    repeat
+        wait(.1)
+        script.Parent.TextTransparency += .1
+    until script.Parent.TextTransparency == 1
+    script.Parent:Destroy()
+end
+coroutine.wrap(AKZW_fake_script)()
+local function KAMHBO_fake_script() -- Back.LocalScript 
+    local script = Instance.new('LocalScript', Back)
+ 
+    script.Parent.MouseButton1Click:Connect(function()
+        script.Parent.Parent.Visible = false
+        script.Parent.Parent.Parent.Menu.Visible = true
+    end)
+end
+coroutine.wrap(KAMHBO_fake_script)()
+local function NKXAN_fake_script() -- GiftR.LocalScript 
+    local script = Instance.new('LocalScript', GiftR)
+ 
+    script.Parent.MouseButton1Click:Connect(function()
+        local args = {
+            [1] = script.Parent.Parent.V.Text
+        }
+    
+        game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("TheEvent"):WaitForChild("[C-S]GetOnline5MinReward"):FireServer(unpack(args))
+    end)
+end
+coroutine.wrap(NKXAN_fake_script)()
+local function IYCP_fake_script() -- GiftRSp.LocalScript 
+    local script = Instance.new('LocalScript', GiftRSp)
+ 
+    local StopBypassR = false
+    script.Parent.MouseButton1Click:Connect(function()
+        if StopBypassR == false then
+            StopBypassR = true
+            script.Parent.Text = "STOP"
+            repeat
+                task.wait()
+                local args = {
+                    [1] = script.Parent.Parent.V.Text
+                }
+    
+                game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("TheEvent"):WaitForChild("[C-S]GetOnline5MinReward"):FireServer(unpack(args))
+            until StopBypassR == false or script.Parent.Parent.V.Text == ""
+        else
+            script.Parent.Text = "SPAM GIFT REWARD"
+            StopBypassR = false
+        end
+    end)
+end
+coroutine.wrap(IYCP_fake_script)()
+local function CVGQ_fake_script() -- BReward.UIDrag 
+    local script = Instance.new('LocalScript', BReward)
+ 
+    -- Made by Real_IceyDev (@lceyDex) --
+    -- Simple UI dragger (PC Only/Any device that has a mouse) --
+    
+    local UIS = game:GetService('UserInputService')
+    local frame = script.Parent
+    local dragToggle = nil
+    local dragSpeed = 0.25
+    local dragStart = nil
+    local startPos = nil
+    
+    local function updateInput(input)
+        local delta = input.Position - dragStart
+        local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
+            startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+        game:GetService('TweenService'):Create(frame, TweenInfo.new(dragSpeed), {Position = position}):Play()
+    end
+    
+    frame.InputBegan:Connect(function(input)
+        if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
+            dragToggle = true
+            dragStart = input.Position
+            startPos = frame.Position
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragToggle = false
+                end
+            end)
+        end
+    end)
+    
+    UIS.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+            if dragToggle then
+                updateInput(input)
+            end
+        end
+    end)
+end
+coroutine.wrap(CVGQ_fake_script)()
+local function ONJNX_fake_script() -- ForceTrade.UIDrag 
+    local script = Instance.new('LocalScript', ForceTrade)
+ 
+    -- Made by Real_IceyDev (@lceyDex) --
+    -- Simple UI dragger (PC Only/Any device that has a mouse) --
+    
+    local UIS = game:GetService('UserInputService')
+    local frame = script.Parent
+    local dragToggle = nil
+    local dragSpeed = 0.25
+    local dragStart = nil
+    local startPos = nil
+    
+    local function updateInput(input)
+        local delta = input.Position - dragStart
+        local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
+            startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+        game:GetService('TweenService'):Create(frame, TweenInfo.new(dragSpeed), {Position = position}):Play()
+    end
+    
+    frame.InputBegan:Connect(function(input)
+        if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
+            dragToggle = true
+            dragStart = input.Position
+            startPos = frame.Position
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragToggle = false
+                end
+            end)
+        end
+    end)
+    
+    UIS.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+            if dragToggle then
+                updateInput(input)
+            end
+        end
+    end)
+end
+coroutine.wrap(ONJNX_fake_script)()
+local function RIYINS_fake_script() -- ForceTrade_2.LocalScript 
+    local script = Instance.new('LocalScript', ForceTrade_2)
+ 
+    script.Parent.MouseButton1Click:Connect(function()
+        local findTarget = game.Players:FindFirstChild(script.Parent.Parent.Target.Text)
+        local args = {
+            [1] = findTarget
+        }
+    
+        game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("Trade"):WaitForChild("[C-S]AcceptTradeRequst"):FireServer(unpack(args))
+    end)
+end
+coroutine.wrap(RIYINS_fake_script)()
+local function VYOBT_fake_script() -- ScrollingFrame.LocalScript 
+    local script = Instance.new('LocalScript', ScrollingFrame)
+ 
+    function update()
+        for i,v in pairs(script.Parent:GetChildren()) do
+            if v:IsA("TextButton") then
+                v:Destroy()
+            end
+        end
+        
+        for i1,v1 in pairs(game.Players:GetChildren()) do
+            local cloneButtonPlayerName = script.Parent.Parent.PlayerNameClone:Clone()
+            cloneButtonPlayerName.Text = v1.Name
+            cloneButtonPlayerName.Parent = script.Parent
+            cloneButtonPlayerName.Visible = true
+            cloneButtonPlayerName.Name = v1.Name.."PlayerName"
+            cloneButtonPlayerName.MouseButton1Click:Connect(function()
+                script.Parent.Parent.Target.Text = cloneButtonPlayerName.Text
+            end)
+        end
+    end
+    
+    update()
+    
+    while wait(3) do
+        update()
+    end
+end
+coroutine.wrap(VYOBT_fake_script)()
+local function GTTFZ_fake_script() -- Back_2.LocalScript 
+    local script = Instance.new('LocalScript', Back_2)
+ 
+    script.Parent.MouseButton1Click:Connect(function()
+        script.Parent.Parent.Visible = false
+        script.Parent.Parent.Parent.Menu.Visible = true
+    end)
+end
+coroutine.wrap(GTTFZ_fake_script)()
+local function QUWG_fake_script() -- Back_3.LocalScript 
+    local script = Instance.new('LocalScript', Back_3)
+ 
+    script.Parent.MouseButton1Click:Connect(function()
+        script.Parent.Parent.Visible = false
+        script.Parent.Parent.Parent.Menu.Visible = true
+    end)
+end
+coroutine.wrap(QUWG_fake_script)()
+local function TFXTPHV_fake_script() -- Gems.LocalScript 
+    local script = Instance.new('LocalScript', Gems)
+ 
+    script.Parent.MouseButton1Click:Connect(function()
+        local args = {
+            [1] = "Gem",
+            [2] = "-"..script.Parent.Parent.Value.Text,
+            [3] = "\229\188\128\232\155\139"
+        }
+    
+        game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("Eco"):WaitForChild("SubPlayerEco"):FireServer(unpack(args))
+    end)
+end
+coroutine.wrap(TFXTPHV_fake_script)()
+local function CWGSOK_fake_script() -- Wins.LocalScript 
+    local script = Instance.new('LocalScript', Wins)
+ 
+    script.Parent.MouseButton1Click:Connect(function()
+        local args = {
+            [1] = "gem",
+            [2] = "-"..script.Parent.Parent.Value.Text,
+            [3] = "\229\188\128\232\155\139"
+        }
+    
+        game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("Eco"):WaitForChild("SubPlayerEco"):FireServer(unpack(args))
+    end)
+end
+coroutine.wrap(CWGSOK_fake_script)()
+local function CYYJPX_fake_script() -- LeaderStats.UIDrag 
+    local script = Instance.new('LocalScript', LeaderStats)
+ 
+    -- Made by Real_IceyDev (@lceyDex) --
+    -- Simple UI dragger (PC Only/Any device that has a mouse) --
+    
+    local UIS = game:GetService('UserInputService')
+    local frame = script.Parent
+    local dragToggle = nil
+    local dragSpeed = 0.25
+    local dragStart = nil
+    local startPos = nil
+    
+    local function updateInput(input)
+        local delta = input.Position - dragStart
+        local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
+            startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+        game:GetService('TweenService'):Create(frame, TweenInfo.new(dragSpeed), {Position = position}):Play()
+    end
+    
+    frame.InputBegan:Connect(function(input)
+        if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
+            dragToggle = true
+            dragStart = input.Position
+            startPos = frame.Position
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragToggle = false
+                end
+            end)
+        end
+    end)
+    
+    UIS.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+            if dragToggle then
+                updateInput(input)
+            end
+        end
+    end)
+end
+coroutine.wrap(CYYJPX_fake_script)()
+local function QCDHKI_fake_script() -- Reset.LocalScript 
+    local script = Instance.new('LocalScript', Reset)
+ 
+    script.Parent.MouseButton1Click:Connect(function()
+        if game.Players.LocalPlayer.Eco.Gem.Value and game.Players.LocalPlayer.Eco.gem.Value <= 0 then
+            local args = {
+                [1] = "gem",
+                [2] = "-"..game.Players.LocalPlayer.Eco.gem.Value,
+                [3] = "\229\188\128\232\155\139"
+            }
+    
+            game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("Eco"):WaitForChild("SubPlayerEco"):FireServer(unpack(args))
+    
+            local args = {
+                [1] = "Gem",
+                [2] = "-"..game.Players.LocalPlayer.Eco.gem.Value,
+                [3] = "\229\188\128\232\155\139"
+            }
+    
+            game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("Eco"):WaitForChild("SubPlayerEco"):FireServer(unpack(args))
+        else
+            local args = {
+                [1] = "gem",
+                [2] = game.Players.LocalPlayer.Eco.gem.Value,
+                [3] = "\229\188\128\232\155\139"
+            }
+    
+            game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("Eco"):WaitForChild("SubPlayerEco"):FireServer(unpack(args))
+    
+            local args = {
+                [1] = "Gem",
+                [2] = game.Players.LocalPlayer.Eco.gem.Value,
+                [3] = "\229\188\128\232\155\139"
+            }
+    
+            game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("Eco"):WaitForChild("SubPlayerEco"):FireServer(unpack(args))
+        end
+    end)
+end
+coroutine.wrap(QCDHKI_fake_script)()
+local function WCKHAWE_fake_script() -- TextLabel_4.LocalScript 
+    local script = Instance.new('LocalScript', TextLabel_4)
+ 
+    wait(0.7)
+    repeat
+        wait(.1)
+        script.Parent.TextTransparency += .1
+    until script.Parent.TextTransparency == 1
+    script.Parent:Destroy()
+end
+coroutine.wrap(WCKHAWE_fake_script)()
+local function JLSZN_fake_script() -- WorldTP.UIDrag 
+    local script = Instance.new('LocalScript', WorldTP)
+ 
+    -- Made by Real_IceyDev (@lceyDex) --
+    -- Simple UI dragger (PC Only/Any device that has a mouse) --
+    
+    local UIS = game:GetService('UserInputService')
+    local frame = script.Parent
+    local dragToggle = nil
+    local dragSpeed = 0.25
+    local dragStart = nil
+    local startPos = nil
+    
+    local function updateInput(input)
+        local delta = input.Position - dragStart
+        local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
+            startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+        game:GetService('TweenService'):Create(frame, TweenInfo.new(dragSpeed), {Position = position}):Play()
+    end
+    
+    frame.InputBegan:Connect(function(input)
+        if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
+            dragToggle = true
+            dragStart = input.Position
+            startPos = frame.Position
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragToggle = false
+                end
+            end)
+        end
+    end)
+    
+    UIS.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+            if dragToggle then
+                updateInput(input)
+            end
+        end
+    end)
+end
+coroutine.wrap(JLSZN_fake_script)()
+local function FEZSIT_fake_script() -- World1.LocalScript 
+    local script = Instance.new('LocalScript', World1)
+ 
+    script.Parent.MouseButton1Click:Connect(function()
+        local args = {
+            [1] = 1
+        }
+    
+        game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("Teleport"):WaitForChild("[C-S]TryTeleportWorld"):FireServer(unpack(args))
+    end)
+end
+coroutine.wrap(FEZSIT_fake_script)()
+local function VKXO_fake_script() -- World2.LocalScript 
+    local script = Instance.new('LocalScript', World2)
+ 
+    script.Parent.MouseButton1Click:Connect(function()
+        local args = {
+            [1] = 2
+        }
+    
+        game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("Teleport"):WaitForChild("[C-S]TryTeleportWorld"):FireServer(unpack(args))
+    end)
+end
+coroutine.wrap(VKXO_fake_script)()
+local function WBKUBLM_fake_script() -- World3.LocalScript 
+    local script = Instance.new('LocalScript', World3)
+ 
+    script.Parent.MouseButton1Click:Connect(function()
+        local args = {
+            [1] = 3
+        }
+    
+        game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("Teleport"):WaitForChild("[C-S]TryTeleportWorld"):FireServer(unpack(args))
+    end)
+end
+coroutine.wrap(WBKUBLM_fake_script)()
+local function GGTV_fake_script() -- World4.LocalScript 
+    local script = Instance.new('LocalScript', World4)
+ 
+    script.Parent.MouseButton1Click:Connect(function()
+        local args = {
+            [1] = 4
+        }
+    
+        game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("Teleport"):WaitForChild("[C-S]TryTeleportWorld"):FireServer(unpack(args))
+    end)
+end
+coroutine.wrap(GGTV_fake_script)()
+local function LPKYHM_fake_script() -- Back_4.LocalScript 
+    local script = Instance.new('LocalScript', Back_4)
+ 
+    script.Parent.MouseButton1Click:Connect(function()
+        script.Parent.Parent.Visible = false
+        script.Parent.Parent.Parent.Menu.Visible = true
+    end)
+end
+coroutine.wrap(LPKYHM_fake_script)()
+local function FMCZF_fake_script() -- Back_5.LocalScript 
+    local script = Instance.new('LocalScript', Back_5)
+ 
+    script.Parent.MouseButton1Click:Connect(function()
+        script.Parent.Parent.Visible = false
+        script.Parent.Parent.Parent.Menu.Visible = true
+    end)
+end
+coroutine.wrap(FMCZF_fake_script)()
+local function WDHI_fake_script() -- RPot.LocalScript 
+    local script = Instance.new('LocalScript', RPot)
+ 
+    script.Parent.MouseButton1Click:Connect(function()
+        local args = {
+            [1] = script.Parent.Parent.RPotion.Text
+        }
+    
+        game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("PotionShop"):WaitForChild("BuyPotion"):FireServer(unpack(args))
+    end)
+end
+coroutine.wrap(WDHI_fake_script)()
+local function ZATVG_fake_script() -- SRPot.LocalScript 
+    local script = Instance.new('LocalScript', SRPot)
+ 
+    local StopBypassR = false
+    script.Parent.MouseButton1Click:Connect(function()
+        if StopBypassR == false then
+            StopBypassR = true
+            script.Parent.Text = "STOP"
+            repeat
+                task.wait()
+                local args = {
+                    [1] = script.Parent.Parent.RPotion.Text
+                }
+    
+                game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("Event"):WaitForChild("PotionShop"):WaitForChild("BuyPotion"):FireServer(unpack(args))
+            until StopBypassR == false or script.Parent.Parent.RPotion.Text == ""
+        else
+            script.Parent.Text = "SPAM RANDOM POTION"
+            StopBypassR = false
+        end
+    end)
+end
+coroutine.wrap(ZATVG_fake_script)()
+local function VNTC_fake_script() -- Potion_2.UIDrag 
+    local script = Instance.new('LocalScript', Potion_2)
+ 
+    -- Made by Real_IceyDev (@lceyDex) --
+    -- Simple UI dragger (PC Only/Any device that has a mouse) --
+    
+    local UIS = game:GetService('UserInputService')
+    local frame = script.Parent
+    local dragToggle = nil
+    local dragSpeed = 0.25
+    local dragStart = nil
+    local startPos = nil
+    
+    local function updateInput(input)
+        local delta = input.Position - dragStart
+        local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
+            startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+        game:GetService('TweenService'):Create(frame, TweenInfo.new(dragSpeed), {Position = position}):Play()
+    end
+    
+    frame.InputBegan:Connect(function(input)
+        if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
+            dragToggle = true
+            dragStart = input.Position
+            startPos = frame.Position
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragToggle = false
+                end
+            end)
+        end
+    end)
+    
+    UIS.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+            if dragToggle then
+                updateInput(input)
+            end
+        end
+    end)
+end
+coroutine.wrap(VNTC_fake_script)()
+ 

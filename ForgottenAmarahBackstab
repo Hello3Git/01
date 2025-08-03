@@ -46,8 +46,8 @@ local function teleportAndUseAbility()
 		local backCFrame = targetHRP.CFrame * CFrame.new(0, 0, 3)
 		hrp.CFrame = backCFrame
 
-		-- Wait 0.08 seconds then activate
-		task.delay(0.08, function()
+		-- Wait 0.04 seconds then activate
+		task.delay(0.04, function()
 			local args = {
 				"UseActorAbility",
 				"Dagger"

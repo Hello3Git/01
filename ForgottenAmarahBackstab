@@ -1,0 +1,70 @@
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local LocalPlayer = Players.LocalPlayer
+local Mouse = LocalPlayer:GetMouse()
+
+-- Create GUI
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "TeleportAbilityGui"
+screenGui.ResetOnSpawn = false
+screenGui.Parent = game.CoreGui
+
+local button = Instance.new("TextButton")
+button.Size = UDim2.new(0, 150, 0, 40)
+button.Position = UDim2.new(0, 100, 0, 100)
+button.Text = "Backstab Teleport (Amarah)"
+button.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+button.TextColor3 = Color3.fromRGB(255, 255, 255)
+button.BorderSizePixel = 1
+button.AutoButtonColor = true
+button.Parent = screenGui
+button.Active = true
+button.Draggable = true
+
+-- Ability function
+local function teleportAndUseAbility()
+	local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+	local hrp = character:FindFirstChild("HumanoidRootPart")
+	if not hrp then return end
+
+	local shortestDistance = math.huge
+	local targetPlayer = nil
+
+	for _, player in pairs(Players:GetPlayers()) do
+		if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+			local theirHRP = player.Character.HumanoidRootPart
+			local distance = (hrp.Position - theirHRP.Position).Magnitude
+			if distance < shortestDistance then
+				shortestDistance = distance
+				targetPlayer = player
+			end
+		end
+	end
+
+	if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
+		local targetHRP = targetPlayer.Character.HumanoidRootPart
+		local backCFrame = targetHRP.CFrame * CFrame.new(0, 0, 3)
+		hrp.CFrame = backCFrame
+
+		-- Wait 0.08 seconds then activate
+		task.delay(0.08, function()
+			local args = {
+				"UseActorAbility",
+				"Dagger"
+			}
+			local success, err = pcall(function()
+				ReplicatedStorage:WaitForChild("Modules"):WaitForChild("Network"):WaitForChild("RemoteEvent"):FireServer(unpack(args))
+			end)
+			if not success then
+				warn("Failed to fire ability:", err)
+			end
+		end)
+	else
+		warn("No nearby player found.")
+	end
+end
+
+-- Click function
+button.MouseButton1Click:Connect(function()
+	teleportAndUseAbility()
+end)

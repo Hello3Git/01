@@ -38,21 +38,20 @@ local function teleportAndUseAbility(targetPlayer)
 	local targetHRP = targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart")
 	if not (hrp and targetHRP) then return end
 
-	local backCFrame = targetHRP.CFrame * CFrame.new(0, 0, 3.2)
+	local backCFrame = targetHRP.CFrame * CFrame.new(0, 0, 2)
 	hrp.CFrame = backCFrame
 
-	task.delay(0.01, function()
-		local args = {
-			"UseActorAbility",
-			"Dagger"
-		}
-		local success, err = pcall(function()
-			ReplicatedStorage:WaitForChild("Modules"):WaitForChild("Network"):WaitForChild("RemoteEvent"):FireServer(unpack(args))
-		end)
-		if not success then
-			warn("Failed to fire ability:", err)
-		end
+	-- No delay
+	local args = {
+		"UseActorAbility",
+		"Dagger"
+	}
+	local success, err = pcall(function()
+		ReplicatedStorage:WaitForChild("Modules"):WaitForChild("Network"):WaitForChild("RemoteEvent"):FireServer(unpack(args))
 	end)
+	if not success then
+		warn("Failed to fire ability:", err)
+	end
 end
 
 -- Auto activation loop
@@ -95,10 +94,10 @@ RunService.Heartbeat:Connect(function()
 	if not targetHRP then return end
 
 	local distance = (hrp.Position - targetHRP.Position).Magnitude
-	if distance <= 3 then
+	if distance <= 1 then -- Activation range
 		cooldown = true
 		teleportAndUseAbility(targetPlayer)
-		task.delay(30, function() -- 30 second cooldown
+		task.delay(30, function()
 			cooldown = false
 		end)
 	end

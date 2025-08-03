@@ -1,70 +1,105 @@
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RunService = game:GetService("RunService")
 local LocalPlayer = Players.LocalPlayer
-local Mouse = LocalPlayer:GetMouse()
 
--- Create GUI
+-- GUI toggle button
 local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "TeleportAbilityGui"
+screenGui.Name = "AutoBackstabToggleGui"
 screenGui.ResetOnSpawn = false
 screenGui.Parent = game.CoreGui
 
-local button = Instance.new("TextButton")
-button.Size = UDim2.new(0, 150, 0, 40)
-button.Position = UDim2.new(0, 100, 0, 100)
-button.Text = "Backstab Teleport (Amarah)"
-button.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-button.TextColor3 = Color3.fromRGB(255, 255, 255)
-button.BorderSizePixel = 1
-button.AutoButtonColor = true
-button.Parent = screenGui
-button.Active = true
-button.Draggable = true
+local toggleButton = Instance.new("TextButton")
+toggleButton.Size = UDim2.new(0, 170, 0, 40)
+toggleButton.Position = UDim2.new(0, 100, 0, 100)
+toggleButton.Text = "Auto Backstab (OFF)"
+toggleButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+toggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+toggleButton.BorderSizePixel = 1
+toggleButton.AutoButtonColor = true
+toggleButton.Parent = screenGui
+toggleButton.Active = true
+toggleButton.Draggable = true
 
--- Ability function
-local function teleportAndUseAbility()
+-- Variables
+local autoEnabled = false
+local cooldown = false
+
+-- Toggle logic
+toggleButton.MouseButton1Click:Connect(function()
+	autoEnabled = not autoEnabled
+	toggleButton.Text = autoEnabled and "Auto Backstab (ON)" or "Auto Backstab (OFF)"
+end)
+
+-- Backstab ability
+local function teleportAndUseAbility(targetPlayer)
 	local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
-	local hrp = character:FindFirstChild("HumanoidRootPart")
+	local hrp = character and character:FindFirstChild("HumanoidRootPart")
+	local targetHRP = targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart")
+	if not (hrp and targetHRP) then return end
+
+	local backCFrame = targetHRP.CFrame * CFrame.new(0, 0, 3.2)
+	hrp.CFrame = backCFrame
+
+	task.delay(0.01, function()
+		local args = {
+			"UseActorAbility",
+			"Dagger"
+		}
+		local success, err = pcall(function()
+			ReplicatedStorage:WaitForChild("Modules"):WaitForChild("Network"):WaitForChild("RemoteEvent"):FireServer(unpack(args))
+		end)
+		if not success then
+			warn("Failed to fire ability:", err)
+		end
+	end)
+end
+
+-- Auto activation loop
+RunService.Heartbeat:Connect(function()
+	if not autoEnabled or cooldown then return end
+
+	local character = LocalPlayer.Character
+	local hrp = character and character:FindFirstChild("HumanoidRootPart")
 	if not hrp then return end
 
-	local shortestDistance = math.huge
+	local highestHealth = -1
 	local targetPlayer = nil
+	local healthTable = {}
 
 	for _, player in pairs(Players:GetPlayers()) do
-		if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-			local theirHRP = player.Character.HumanoidRootPart
-			local distance = (hrp.Position - theirHRP.Position).Magnitude
-			if distance < shortestDistance then
-				shortestDistance = distance
-				targetPlayer = player
+		if player ~= LocalPlayer and player.Character then
+			local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
+			local theirHRP = player.Character:FindFirstChild("HumanoidRootPart")
+			if humanoid and theirHRP then
+				table.insert(healthTable, humanoid.Health)
+				if humanoid.Health > highestHealth then
+					highestHealth = humanoid.Health
+					targetPlayer = player
+				end
 			end
 		end
 	end
 
-	if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
-		local targetHRP = targetPlayer.Character.HumanoidRootPart
-		local backCFrame = targetHRP.CFrame * CFrame.new(0, 0, 3)
-		hrp.CFrame = backCFrame
-
-		-- Wait 0.02 seconds then activate
-		task.delay(0.02, function()
-			local args = {
-				"UseActorAbility",
-				"Dagger"
-			}
-			local success, err = pcall(function()
-				ReplicatedStorage:WaitForChild("Modules"):WaitForChild("Network"):WaitForChild("RemoteEvent"):FireServer(unpack(args))
-			end)
-			if not success then
-				warn("Failed to fire ability:", err)
-			end
-		end)
-	else
-		warn("No nearby player found.")
+	local allSame = true
+	for i = 2, #healthTable do
+		if healthTable[i] ~= healthTable[1] then
+			allSame = false
+			break
+		end
 	end
-end
 
--- Click function
-button.MouseButton1Click:Connect(function()
-	teleportAndUseAbility()
+	if allSame or not targetPlayer or not targetPlayer.Character then return end
+
+	local targetHRP = targetPlayer.Character:FindFirstChild("HumanoidRootPart")
+	if not targetHRP then return end
+
+	local distance = (hrp.Position - targetHRP.Position).Magnitude
+	if distance <= 3 then
+		cooldown = true
+		teleportAndUseAbility(targetPlayer)
+		task.delay(30, function() -- 30 second cooldown
+			cooldown = false
+		end)
+	end
 end)

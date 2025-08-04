@@ -24,6 +24,19 @@ toggleButton.Draggable = true
 -- Variables
 local autoEnabled = false
 local cooldown = false
+local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local hrp = nil
+
+-- Function to update character & HRP on respawn
+local function onCharacterAdded(char)
+	character = char
+	hrp = nil
+	character:WaitForChild("HumanoidRootPart", 5)
+	hrp = character:FindFirstChild("HumanoidRootPart")
+end
+
+LocalPlayer.CharacterAdded:Connect(onCharacterAdded)
+onCharacterAdded(character) -- initialize on first spawn
 
 -- Toggle logic
 toggleButton.MouseButton1Click:Connect(function()
@@ -33,10 +46,9 @@ end)
 
 -- Backstab ability
 local function teleportAndUseAbility(targetPlayer)
-	local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
-	local hrp = character and character:FindFirstChild("HumanoidRootPart")
+	if not character or not hrp then return end
 	local targetHRP = targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart")
-	if not (hrp and targetHRP) then return end
+	if not targetHRP then return end
 
 	-- Teleport 1.6 studs behind target
 	local backCFrame = targetHRP.CFrame * CFrame.new(0, 0, 1.6)
@@ -58,10 +70,7 @@ end
 -- Auto activation loop
 RunService.Heartbeat:Connect(function()
 	if not autoEnabled or cooldown then return end
-
-	local character = LocalPlayer.Character
-	local hrp = character and character:FindFirstChild("HumanoidRootPart")
-	if not hrp then return end
+	if not character or not hrp then return end
 
 	local highestHealth = -1
 	local targetPlayer = nil

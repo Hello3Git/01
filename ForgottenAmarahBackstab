@@ -38,10 +38,11 @@ local function teleportAndUseAbility(targetPlayer)
 	local targetHRP = targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart")
 	if not (hrp and targetHRP) then return end
 
+	-- Teleport behind target
 	local backCFrame = targetHRP.CFrame * CFrame.new(0, 0, 2)
 	hrp.CFrame = backCFrame
 
-	-- No delay
+	-- Instantly activate dagger
 	local args = {
 		"UseActorAbility",
 		"Dagger"
@@ -94,7 +95,7 @@ RunService.Heartbeat:Connect(function()
 	if not targetHRP then return end
 
 	local distance = (hrp.Position - targetHRP.Position).Magnitude
-	if distance <= 1 then -- Activation range
+	if distance <= 2 then -- Activation range is now 2 studs
 		cooldown = true
 		teleportAndUseAbility(targetPlayer)
 		task.delay(30, function()

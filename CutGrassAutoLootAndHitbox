@@ -10,7 +10,7 @@ gui.Parent = game:GetService("CoreGui")
 
 local frame = Instance.new("Frame")
 frame.Size = UDim2.new(0, 240, 0, 300)
-frame.Position = UDim2.new(0, 50, 0, 10) -- 👈 position under chat
+frame.Position = UDim2.new(0, 100, 0, 10) -- now placed under chat
 frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 frame.BorderSizePixel = 0
 frame.Active = true
@@ -54,7 +54,7 @@ end)
 
 -- Title bar
 local title = Instance.new("TextLabel")
-title.Size = UDim2.new(1, 0, 0, 30)
+title.Size = UDim2.new(1, -30, 0, 30) -- leave space for minimize button
 title.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
 title.Text = "📦 Auto Loot Levels"
 title.Font = Enum.Font.GothamBold
@@ -64,17 +64,18 @@ title.TextXAlignment = Enum.TextXAlignment.Left
 title.Parent = frame
 
 -- Minimize button
-local minimizeBtn = Instance.new("TextButton")
-minimizeBtn.Size = UDim2.new(0, 30, 1, 0)
-minimizeBtn.Position = UDim2.new(1, -35, 0, 0)
-minimizeBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-minimizeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-minimizeBtn.Font = Enum.Font.GothamBold
-minimizeBtn.TextSize = 16
-minimizeBtn.Text = "➖"
-minimizeBtn.Parent = title
+local minimizeButton = Instance.new("TextButton")
+minimizeButton.Size = UDim2.new(0, 30, 0, 30)
+minimizeButton.Position = UDim2.new(1, -30, 0, 0)
+minimizeButton.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+minimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+minimizeButton.Font = Enum.Font.GothamBold
+minimizeButton.TextSize = 16
+minimizeButton.Text = "—"
+minimizeButton.Parent = frame
 
--- Content holder
+local minimized = false
+
 local contentHolder = Instance.new("ScrollingFrame")
 contentHolder.Size = UDim2.new(1, 0, 1, -30)
 contentHolder.Position = UDim2.new(0, 0, 0, 30)
@@ -82,6 +83,19 @@ contentHolder.CanvasSize = UDim2.new(0, 0, 0, 0)
 contentHolder.ScrollBarThickness = 5
 contentHolder.BackgroundTransparency = 1
 contentHolder.Parent = frame
+
+minimizeButton.MouseButton1Click:Connect(function()
+	minimized = not minimized
+	if minimized then
+		contentHolder.Visible = false
+		frame.Size = UDim2.new(0, 240, 0, 30)
+		minimizeButton.Text = "+"
+	else
+		contentHolder.Visible = true
+		frame.Size = UDim2.new(0, 240, 0, 300)
+		minimizeButton.Text = "—"
+	end
+end)
 
 local UIListLayout = Instance.new("UIListLayout")
 UIListLayout.Padding = UDim.new(0, 5)
@@ -93,22 +107,6 @@ local function updateCanvasSize()
 end
 UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(updateCanvasSize)
 
--- Minimize toggle
-local minimized = false
-minimizeBtn.MouseButton1Click:Connect(function()
-	minimized = not minimized
-	if minimized then
-		contentHolder.Visible = false
-		frame.Size = UDim2.new(0, 240, 0, 30)
-		minimizeBtn.Text = "➕"
-	else
-		contentHolder.Visible = true
-		frame.Size = UDim2.new(0, 240, 0, 300)
-		minimizeBtn.Text = "➖"
-	end
-end)
-
--- Loot setup
 local lootOrder = {
 	{"Level 1+ Loot", {"tier1_size1", "tier1_size2", "tier2_size1", "tier2_size2"}},
 	{"Level 4+ Loot", {"tier3_size1", "tier3_size2"}},
@@ -123,8 +121,8 @@ local runningThreads = {}
 local function startLootLoop(name, models, button)
 	if runningThreads[name] then
 		activeLoops[name] = false
-		runningThreads[name] = nil
-		task.wait()
+		task.cancel(runningThreads[name])
+		wait()
 	end
 
 	activeLoops[name] = true
@@ -180,7 +178,6 @@ for _, entry in ipairs(lootOrder) do
 	end)
 end
 
--- Hitbox Expander
 local hitboxLooping = false
 local hitboxButton = Instance.new("TextButton")
 hitboxButton.Size = UDim2.new(1, -10, 0, 35)

@@ -3,6 +3,13 @@ local LocalPlayer = Players.LocalPlayer
 local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
 local HRP = Character:WaitForChild("HumanoidRootPart")
 
+-- 🔹 Update Character & HRP when you respawn
+local function onCharacterAdded(char)
+	Character = char
+	HRP = char:WaitForChild("HumanoidRootPart")
+end
+LocalPlayer.CharacterAdded:Connect(onCharacterAdded)
+
 local gui = Instance.new("ScreenGui")
 gui.Name = "MultiLootGui"
 gui.ResetOnSpawn = false
@@ -10,7 +17,7 @@ gui.Parent = game:GetService("CoreGui")
 
 local frame = Instance.new("Frame")
 frame.Size = UDim2.new(0, 240, 0, 300)
-frame.Position = UDim2.new(0, 100, 0, 10) -- now placed under chat
+frame.Position = UDim2.new(0, 100, 0, 180) -- placed under chat
 frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 frame.BorderSizePixel = 0
 frame.Active = true

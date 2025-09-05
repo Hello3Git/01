@@ -3,6 +3,13 @@ local LocalPlayer = Players.LocalPlayer
 local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
 local HRP = Character:WaitForChild("HumanoidRootPart")
 
+-- 🔹 Function to refresh Character & HRP when respawning
+local function onCharacterAdded(char)
+    Character = char
+    HRP = char:WaitForChild("HumanoidRootPart")
+end
+LocalPlayer.CharacterAdded:Connect(onCharacterAdded)
+
 local gui = Instance.new("ScreenGui")
 gui.Name = "MultiLootGui"
 gui.ResetOnSpawn = false
@@ -10,7 +17,7 @@ gui.Parent = game:GetService("CoreGui")
 
 local frame = Instance.new("Frame")
 frame.Size = UDim2.new(0, 240, 0, 300)
-frame.Position = UDim2.new(0, 100, 0, 10) -- fixed position here
+frame.Position = UDim2.new(0, 100, 0, 10) -- top position
 frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 frame.BorderSizePixel = 0
 frame.Active = true
@@ -62,15 +69,15 @@ title.TextColor3 = Color3.fromRGB(255, 255, 255)
 title.TextXAlignment = Enum.TextXAlignment.Left
 title.Parent = frame
 
--- minimize button
+-- 🔹 Minimize Button
 local minimizeButton = Instance.new("TextButton")
 minimizeButton.Size = UDim2.new(0, 30, 0, 30)
 minimizeButton.Position = UDim2.new(1, -30, 0, 0)
-minimizeButton.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+minimizeButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 minimizeButton.Text = "-"
-minimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 minimizeButton.Font = Enum.Font.GothamBold
 minimizeButton.TextSize = 18
+minimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 minimizeButton.Parent = frame
 
 local contentHolder = Instance.new("ScrollingFrame")
@@ -91,11 +98,21 @@ local function updateCanvasSize()
 end
 UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(updateCanvasSize)
 
+-- 🔹 Minimize logic
 local minimized = false
+local originalSize = frame.Size
+
 minimizeButton.MouseButton1Click:Connect(function()
     minimized = not minimized
-    contentHolder.Visible = not minimized
-    minimizeButton.Text = minimized and "+" or "-"
+    if minimized then
+        contentHolder.Visible = false
+        frame.Size = UDim2.new(originalSize.X.Scale, originalSize.X.Offset, 0, 30) -- shrink
+        minimizeButton.Text = "+"
+    else
+        contentHolder.Visible = true
+        frame.Size = originalSize -- restore
+        minimizeButton.Text = "-"
+    end
 end)
 
 local lootOrder = {

@@ -1,0 +1,215 @@
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local HRP = Character:WaitForChild("HumanoidRootPart")
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "MultiLootGui"
+gui.ResetOnSpawn = false
+gui.Parent = game:GetService("CoreGui")
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 240, 0, 300)
+frame.Position = UDim2.new(0, 50, 0, 10) -- 👈 position under chat
+frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+frame.BorderSizePixel = 0
+frame.Active = true
+frame.Parent = gui
+
+local UserInputService = game:GetService("UserInputService")
+local dragging, dragInput, dragStart, startPos
+
+local function update(input)
+	if not dragging then return end
+	local delta = input.Position - dragStart
+	frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
+		startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end
+
+frame.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = true
+		dragStart = input.Position
+		startPos = frame.Position
+
+		input.Changed:Connect(function()
+			if input.UserInputState == Enum.UserInputState.End then
+				dragging = false
+			end
+		end)
+	end
+end)
+
+frame.InputChanged:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseMovement then
+		dragInput = input
+	end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+	if input == dragInput then
+		update(input)
+	end
+end)
+
+-- Title bar
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 30)
+title.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+title.Text = "📦 Auto Loot Levels"
+title.Font = Enum.Font.GothamBold
+title.TextSize = 16
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.TextXAlignment = Enum.TextXAlignment.Left
+title.Parent = frame
+
+-- Minimize button
+local minimizeBtn = Instance.new("TextButton")
+minimizeBtn.Size = UDim2.new(0, 30, 1, 0)
+minimizeBtn.Position = UDim2.new(1, -35, 0, 0)
+minimizeBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+minimizeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+minimizeBtn.Font = Enum.Font.GothamBold
+minimizeBtn.TextSize = 16
+minimizeBtn.Text = "➖"
+minimizeBtn.Parent = title
+
+-- Content holder
+local contentHolder = Instance.new("ScrollingFrame")
+contentHolder.Size = UDim2.new(1, 0, 1, -30)
+contentHolder.Position = UDim2.new(0, 0, 0, 30)
+contentHolder.CanvasSize = UDim2.new(0, 0, 0, 0)
+contentHolder.ScrollBarThickness = 5
+contentHolder.BackgroundTransparency = 1
+contentHolder.Parent = frame
+
+local UIListLayout = Instance.new("UIListLayout")
+UIListLayout.Padding = UDim.new(0, 5)
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout.Parent = contentHolder
+
+local function updateCanvasSize()
+	contentHolder.CanvasSize = UDim2.new(0, 0, 0, UIListLayout.AbsoluteContentSize.Y + 10)
+end
+UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(updateCanvasSize)
+
+-- Minimize toggle
+local minimized = false
+minimizeBtn.MouseButton1Click:Connect(function()
+	minimized = not minimized
+	if minimized then
+		contentHolder.Visible = false
+		frame.Size = UDim2.new(0, 240, 0, 30)
+		minimizeBtn.Text = "➕"
+	else
+		contentHolder.Visible = true
+		frame.Size = UDim2.new(0, 240, 0, 300)
+		minimizeBtn.Text = "➖"
+	end
+end)
+
+-- Loot setup
+local lootOrder = {
+	{"Level 1+ Loot", {"tier1_size1", "tier1_size2", "tier2_size1", "tier2_size2"}},
+	{"Level 4+ Loot", {"tier3_size1", "tier3_size2"}},
+	{"Level 7+ Loot", {"tier4_size1", "tier4_size2"}},
+	{"Level 11+ Loot", {"tier5_size1", "tier5_size2"}},
+	{"Level 16+ Loot", {"tier6_size1", "tier6_size2"}}
+}
+
+local activeLoops = {}
+local runningThreads = {}
+
+local function startLootLoop(name, models, button)
+	if runningThreads[name] then
+		activeLoops[name] = false
+		runningThreads[name] = nil
+		task.wait()
+	end
+
+	activeLoops[name] = true
+	button.Text = "🛑 Stop " .. name
+
+	runningThreads[name] = task.spawn(function()
+		while activeLoops[name] do
+			for _, zone in ipairs(workspace:WaitForChild("LootZones"):GetChildren()) do
+				local lootFolder = zone:FindFirstChild("Loot")
+				if lootFolder then
+					for _, model in ipairs(lootFolder:GetChildren()) do
+						if table.find(models, model.Name) and model:IsA("Model") then
+							local part = model.PrimaryPart or model:FindFirstChildWhichIsA("BasePart")
+							local prompt = model:FindFirstChildWhichIsA("ProximityPrompt", true)
+							if part and prompt then
+								HRP.CFrame = part.CFrame + Vector3.new(0, 3, 0)
+								task.wait(0.1)
+								pcall(function() fireproximityprompt(prompt) end)
+								task.wait(0.1)
+								if not activeLoops[name] then return end
+							end
+						end
+					end
+				end
+			end
+			task.wait(0.3)
+		end
+	end)
+end
+
+local function stopLootLoop(name, button)
+	activeLoops[name] = false
+	button.Text = "▶️ Start " .. name
+end
+
+for _, entry in ipairs(lootOrder) do
+	local name, models = entry[1], entry[2]
+	local button = Instance.new("TextButton")
+	button.Size = UDim2.new(1, -10, 0, 35)
+	button.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+	button.TextColor3 = Color3.fromRGB(255, 255, 255)
+	button.Font = Enum.Font.Gotham
+	button.TextSize = 14
+	button.Text = "▶️ Start " .. name
+	button.Parent = contentHolder
+
+	button.MouseButton1Click:Connect(function()
+		if activeLoops[name] then
+			stopLootLoop(name, button)
+		else
+			startLootLoop(name, models, button)
+		end
+	end)
+end
+
+-- Hitbox Expander
+local hitboxLooping = false
+local hitboxButton = Instance.new("TextButton")
+hitboxButton.Size = UDim2.new(1, -10, 0, 35)
+hitboxButton.BackgroundColor3 = Color3.fromRGB(65, 30, 30)
+hitboxButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+hitboxButton.Font = Enum.Font.Gotham
+hitboxButton.TextSize = 14
+hitboxButton.Text = "▶️ Start Hitbox Expander"
+hitboxButton.Parent = contentHolder
+
+hitboxButton.MouseButton1Click:Connect(function()
+	hitboxLooping = not hitboxLooping
+	hitboxButton.Text = hitboxLooping and "🛑 Stop Hitbox Expander" or "▶️ Start Hitbox Expander"
+	if hitboxLooping then
+		task.spawn(function()
+			while hitboxLooping do
+				for _, player in ipairs(Players:GetPlayers()) do
+					if player ~= LocalPlayer and player.Character then
+						for _, part in ipairs(player.Character:GetChildren()) do
+							if part:IsA("BasePart") then
+								part.Size = Vector3.new(20, 20, 20)
+								part.CanCollide = false
+								part.Massless = true
+							end
+						end
+					end
+				end
+				task.wait(0.5)
+			end
+		end)
+	end
+end)

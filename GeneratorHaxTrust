@@ -1,0 +1,33 @@
+-- Variables
+local player = game.Players.LocalPlayer
+local mouse = player:GetMouse()
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- Create ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "RemoteButtonGui"
+screenGui.Parent = playerGui
+
+-- Create Button
+local button = Instance.new("TextButton")
+button.Size = UDim2.new(0, 150, 0, 50)
+button.Position = UDim2.new(0.5, -75, 0.5, -25)
+button.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+button.TextColor3 = Color3.fromRGB(255, 255, 255)
+button.Text = "Do Generator"
+button.Parent = screenGui
+button.Active = true
+button.Draggable = true  -- Makes the button draggable
+
+-- Reference the RemoteEvent
+local remote = workspace:WaitForChild("Map")
+                     :WaitForChild("Ingame")
+                     :WaitForChild("Map")
+                     :WaitForChild("Generator")
+                     :WaitForChild("Remotes")
+                     :WaitForChild("RE")
+
+-- Button click fires the RemoteEvent
+button.MouseButton1Click:Connect(function()
+    remote:FireServer()
+end)

@@ -103,7 +103,7 @@ pcall(function()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/Gazer-Ha/Forsakontol/refs/heads/main/Esp%20fix'))()
 end)
 
--- ======== DO GENERATORS GUI ======== --
-pcall(function
+-- ======== LOAD GENERATORHAX ======== --
+pcall(function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Hello3Git/01/ref/heads/main/GeneratorHaxTrust"))()
 end)

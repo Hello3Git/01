@@ -1,7 +1,5 @@
 -- ======== VARIABLES ======== --
 local player = game.Players.LocalPlayer
-local playerGui = player:WaitForChild("PlayerGui")
-local character = player.Character or player.CharacterAdded:Wait()
 local cam = workspace.CurrentCamera or workspace:FindFirstChildOfClass("Camera")
 
 -- ======== STAMINA PATCH ======== --
@@ -10,6 +8,7 @@ local function waitFor(child, name, timeout)
 end
 
 local function patchStamina()
+    local character = player.Character or player.CharacterAdded:Wait()
     local success, err = pcall(function()
         local speedMultFolder = waitFor(character, "SpeedMultipliers")
         local fovMultFolder = waitFor(character, "FOVMultipliers")
@@ -106,13 +105,19 @@ end)
 
 -- ======== DO GENERATORS GUI ======== --
 local function createGeneratorGui()
-    -- Prevent duplicates
-    if playerGui:FindFirstChild("RemoteButtonGui") then return end
+    local playerGui = player:WaitForChild("PlayerGui")
+    
+    -- Remove existing GUI
+    if playerGui:FindFirstChild("RemoteButtonGui") then
+        playerGui.RemoteButtonGui:Destroy()
+    end
 
+    -- Create ScreenGui
     local screenGui = Instance.new("ScreenGui")
     screenGui.Name = "RemoteButtonGui"
     screenGui.Parent = playerGui
 
+    -- Create Button
     local button = Instance.new("TextButton")
     button.Size = UDim2.new(0,150,0,50)
     button.Position = UDim2.new(0.5,-75,0.5,-25)
@@ -123,22 +128,32 @@ local function createGeneratorGui()
     button.Draggable = true
     button.Parent = screenGui
 
-    local remote = workspace:WaitForChild("Map")
-                     :WaitForChild("Ingame")
-                     :WaitForChild("Map")
-                     :WaitForChild("Generator")
-                     :WaitForChild("Remotes")
-                     :WaitForChild("RE")
+    -- Find RemoteEvent safely
+    local remote
+    local success, err = pcall(function()
+        remote = workspace:WaitForChild("Map",10)
+                        :WaitForChild("Ingame",10)
+                        :WaitForChild("Map",10)
+                        :WaitForChild("Generator",10)
+                        :WaitForChild("Remotes",10)
+                        :WaitForChild("RE",10)
+    end)
 
+    if not success or not remote then
+        warn("[!] RemoteEvent not found")
+        return
+    end
+
+    -- Button click fires RemoteEvent
     button.MouseButton1Click:Connect(function()
         remote:FireServer()
     end)
 end
 
--- Create GUI initially
+-- Run initially
 createGeneratorGui()
 
--- Recreate GUI on respawn
+-- Recreate on respawn
 player.CharacterAdded:Connect(function()
     wait(1)
     createGeneratorGui()

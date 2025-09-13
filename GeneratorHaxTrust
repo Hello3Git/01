@@ -1,33 +1,46 @@
 -- Variables
 local player = game.Players.LocalPlayer
-local mouse = player:GetMouse()
-local playerGui = player:WaitForChild("PlayerGui")
 
--- Create ScreenGui
-local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "RemoteButtonGui"
-screenGui.Parent = playerGui
+-- Function to create the GUI
+local function createGui()
+    -- Check if GUI already exists
+    if player:FindFirstChild("PlayerGui"):FindFirstChild("RemoteButtonGui") then return end
 
--- Create Button
-local button = Instance.new("TextButton")
-button.Size = UDim2.new(0, 150, 0, 50)
-button.Position = UDim2.new(0.5, -75, 0.5, -25)
-button.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-button.TextColor3 = Color3.fromRGB(255, 255, 255)
-button.Text = "Do Generator"
-button.Parent = screenGui
-button.Active = true
-button.Draggable = true  -- Makes the button draggable
+    -- Create ScreenGui
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "RemoteButtonGui"
+    screenGui.Parent = player:WaitForChild("PlayerGui")
 
--- Reference the RemoteEvent
-local remote = workspace:WaitForChild("Map")
-                     :WaitForChild("Ingame")
-                     :WaitForChild("Map")
-                     :WaitForChild("Generator")
-                     :WaitForChild("Remotes")
-                     :WaitForChild("RE")
+    -- Create Button
+    local button = Instance.new("TextButton")
+    button.Size = UDim2.new(0, 150, 0, 50)
+    button.Position = UDim2.new(0.5, -75, 0.5, -25)
+    button.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    button.Text = "Do Generators"
+    button.Parent = screenGui
+    button.Active = true
+    button.Draggable = true
 
--- Button click fires the RemoteEvent
-button.MouseButton1Click:Connect(function()
-    remote:FireServer()
+    -- Reference the RemoteEvent
+    local remote = workspace:WaitForChild("Map")
+                         :WaitForChild("Ingame")
+                         :WaitForChild("Map")
+                         :WaitForChild("Generator")
+                         :WaitForChild("Remotes")
+                         :WaitForChild("RE")
+
+    -- Button click fires the RemoteEvent
+    button.MouseButton1Click:Connect(function()
+        remote:FireServer()
+    end)
+end
+
+-- Create GUI initially
+createGui()
+
+-- Recreate GUI if the player respawns
+player.CharacterAdded:Connect(function()
+    wait(1)  -- small delay to ensure PlayerGui exists
+    createGui()
 end)

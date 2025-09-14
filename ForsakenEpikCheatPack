@@ -1,8 +1,54 @@
--- ======== VARIABLES ======== --
+-- =====================================
+-- 1️⃣ LOCK-ON TO HIGHEST HP
+-- =====================================
 local player = game.Players.LocalPlayer
-local cam = workspace.CurrentCamera or workspace:FindFirstChildOfClass("Camera")
+local cam = workspace.CurrentCamera
 
--- ======== STAMINA PATCH ======== --
+local remote = game:GetService("ReplicatedStorage")
+    :WaitForChild("Modules")
+    :WaitForChild("Network")
+    :WaitForChild("RemoteEvent")
+
+local function getHighestHealthChar()
+    local best, target = -math.huge, nil
+    for _, plr in ipairs(game.Players:GetPlayers()) do
+        if plr ~= player and plr.Character and plr.Character:FindFirstChild("Humanoid") then
+            local hp = plr.Character.Humanoid.Health
+            if hp > best then
+                best = hp
+                target = plr.Character
+            end
+        end
+    end
+    return target
+end
+
+local function lockOn(duration)
+    local target = getHighestHealthChar()
+    if not target or not target:FindFirstChild("HumanoidRootPart") then return end
+
+    local hrp = target.HumanoidRootPart
+    local endTime = tick() + duration
+
+    while tick() < endTime do
+        cam.CFrame = CFrame.new(cam.CFrame.Position, hrp.Position)
+        task.wait()
+    end
+end
+
+-- hook your remote
+remote.OnClientEvent:Connect(function(a, b)
+    if a == "UseActorAbility" and b == "NoLongerReady" then
+        lockOn(2.5)
+    end
+end)
+
+-- example: fire and lock yourself
+remote:FireServer("UseActorAbility","NoLongerReady")
+
+-- =====================================
+-- 2️⃣ STAMINA PATCH
+-- =====================================
 local function waitFor(child, name, timeout)
     return child:WaitForChild(name, timeout or 10)
 end
@@ -39,8 +85,18 @@ local function patchStamina()
 end
 
 patchStamina()
+player.CharacterAdded:Connect(patchStamina) -- reapplies after respawn
 
--- ======== CROSSHAIR ======== --
+-- =====================================
+-- 3️⃣ ESP
+-- =====================================
+pcall(function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/Gazer-Ha/Forsakontol/refs/heads/main/Esp%20fix'))()
+end)
+
+-- =====================================
+-- 4️⃣ CROSSHAIR
+-- =====================================
 local crosshairSettings = {
     color = Color3.fromRGB(255, 128, 255),
     thickness = 2,
@@ -97,13 +153,3 @@ if crosshairSettings.recenter then
         getgenv().crosshair_y["Line"].From = Vector2.new((cam.ViewportSize.X/2)-crosshairSettings.x_offset,(cam.ViewportSize.Y/2)-crosshairSettings.y_offset+crosshairSettings.length)
     end)
 end
-
--- ======== LOAD ESP ======== --
-pcall(function()
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/Gazer-Ha/Forsakontol/refs/heads/main/Esp%20fix'))()
-end)
-
--- ======== LOAD GENERATORHAX ======== --
-pcall(function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Hello3Git/01/ref/heads/main/GeneratorHaxTrust"))()
-end)

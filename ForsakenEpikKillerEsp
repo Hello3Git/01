@@ -1,0 +1,73 @@
+-- ESP Outline for player with highest health (sticks until death)
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local RunService = game:GetService("RunService")
+
+-- Highlight outline
+local highlight = Instance.new("Highlight")
+highlight.FillTransparency = 1
+highlight.OutlineColor = Color3.fromRGB(255, 0, 0)
+highlight.OutlineTransparency = 0
+highlight.Parent = game.CoreGui
+
+-- Billboard for health text
+local healthBillboard = Instance.new("BillboardGui")
+healthBillboard.Size = UDim2.new(0, 100, 0, 20)
+healthBillboard.AlwaysOnTop = true
+healthBillboard.StudsOffset = Vector3.new(0, 0, 0) -- centered on body
+
+local textLabel = Instance.new("TextLabel")
+textLabel.Size = UDim2.new(1, 0, 1, 0)
+textLabel.BackgroundTransparency = 1
+textLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+textLabel.TextStrokeTransparency = 0
+textLabel.TextScaled = true
+textLabel.Font = Enum.Font.SourceSansBold
+textLabel.Parent = healthBillboard
+
+healthBillboard.Parent = game.CoreGui
+
+local currentTarget
+
+local function getHighestHealthPlayer()
+    local highest, target = -math.huge, nil
+    for _, player in ipairs(Players:GetPlayers()) do
+        if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("Humanoid") then
+            local hp = player.Character.Humanoid.Health
+            if hp > highest and hp > 0 then
+                highest = hp
+                target = player
+            end
+        end
+    end
+    return target
+end
+
+RunService.RenderStepped:Connect(function()
+    -- switch target if dead/missing
+    if not currentTarget 
+        or not currentTarget.Character 
+        or not currentTarget.Character:FindFirstChild("Humanoid") 
+        or currentTarget.Character.Humanoid.Health <= 0 then
+        currentTarget = getHighestHealthPlayer()
+    end
+
+    if currentTarget and currentTarget.Character then
+        local hum = currentTarget.Character:FindFirstChild("Humanoid")
+        local root = currentTarget.Character:FindFirstChild("HumanoidRootPart")
+
+        if hum and root then
+            highlight.Adornee = currentTarget.Character
+            healthBillboard.Adornee = root -- center of body
+            textLabel.Text = "HP: "..math.floor(hum.Health)
+            highlight.Enabled = true
+            healthBillboard.Enabled = true
+        else
+            highlight.Enabled = false
+            healthBillboard.Enabled = false
+        end
+    else
+        highlight.Enabled = false
+        healthBillboard.Enabled = false
+    end
+end)

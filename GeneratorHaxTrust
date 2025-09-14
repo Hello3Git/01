@@ -1,23 +1,40 @@
-local player = game.Players.LocalPlayer
-local playerGui = player:WaitForChild("PlayerGui")
+local function createGeneratorGui()
+    local playerGui = player:WaitForChild("PlayerGui")
 
--- ✅ Only create once
-if not playerGui:FindFirstChild("GeneratorButtonGui") then
+    -- Remove existing GUI
+    if playerGui:FindFirstChild("RemoteButtonGui") then
+        playerGui.RemoteButtonGui:Destroy()
+    end
+
+    -- Create ScreenGui
     local screenGui = Instance.new("ScreenGui")
-    screenGui.Name = "GeneratorButtonGui"
+    screenGui.Name = "RemoteButtonGui"
     screenGui.Parent = playerGui
 
+    -- Create Button
     local button = Instance.new("TextButton")
-    button.Size = UDim2.new(0, 150, 0, 50)
-    button.Position = UDim2.new(0.5, -75, 0.8, -25)
-    button.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-    button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    button.Size = UDim2.new(0,150,0,50)
+    button.Position = UDim2.new(0,100,0,10)
+    button.BackgroundColor3 = Color3.fromRGB(50,50,50)
+    button.TextColor3 = Color3.fromRGB(255,255,255)
     button.Text = "Do Generators"
     button.Active = true
     button.Draggable = true
     button.Parent = screenGui
 
+    -- Button click loads external script
     button.MouseButton1Click:Connect(function()
-        workspace:WaitForChild("Map"):WaitForChild("Ingame"):WaitForChild("Map"):WaitForChild("Generator"):WaitForChild("Remotes"):WaitForChild("RE"):FireServer()
+        pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Hello3Git/01/refs/heads/main/GeneratorHax"))()
+        end)
     end)
 end
+
+-- Run initially
+createGeneratorGui()
+
+-- Recreate on respawn
+player.CharacterAdded:Connect(function()
+    wait(1)
+    createGeneratorGui()
+end)

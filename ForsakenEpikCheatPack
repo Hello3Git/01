@@ -1,58 +1,8 @@
--- ======== 1. LOCK ON (Highest HP Target, Respawn-Safe) ======== --
+-- =====================================
+-- 2️⃣ STAMINA PATCH
+-- =====================================
 local player = game.Players.LocalPlayer
 
-local function setupLockOn()
-    local cam = workspace.CurrentCamera
-    local remote = game:GetService("ReplicatedStorage")
-        :WaitForChild("Modules")
-        :WaitForChild("Network")
-        :WaitForChild("RemoteEvent")
-
-    local function getHighestHealthChar()
-        local best, target = -math.huge, nil
-        for _, plr in ipairs(game.Players:GetPlayers()) do
-            if plr ~= player and plr.Character and plr.Character:FindFirstChild("Humanoid") then
-                local hp = plr.Character.Humanoid.Health
-                if hp > best then
-                    best = hp
-                    target = plr.Character
-                end
-            end
-        end
-        return target
-    end
-
-    local function lockOn(duration)
-        local target = getHighestHealthChar()
-        if not target or not target:FindFirstChild("HumanoidRootPart") then return end
-        local hrp = target.HumanoidRootPart
-        local endTime = tick() + duration
-        while tick() < endTime do
-            cam.CFrame = CFrame.new(cam.CFrame.Position, hrp.Position)
-            task.wait()
-        end
-    end
-
-    remote.OnClientEvent:Connect(function(a, b)
-        if a == "UseActorAbility" and b == "NoLongerReady" then
-            lockOn(1.6) -- respawn-safe lockon
-        end
-    end)
-
-    -- Example auto-fire
-    remote:FireServer("UseActorAbility","NoLongerReady")
-end
-
--- Run once
-setupLockOn()
-
--- Run again after respawn
-player.CharacterAdded:Connect(function()
-    task.wait(1) -- wait for new character/camera
-    setupLockOn()
-end)
-
--- ======== 2. STAMINA PATCH ======== --
 local function waitFor(child, name, timeout)
     return child:WaitForChild(name, timeout or 10)
 end
@@ -62,7 +12,7 @@ local function patchStamina()
     local success, err = pcall(function()
         local speedMultFolder = waitFor(character, "SpeedMultipliers")
         local fovMultFolder = waitFor(character, "FOVMultipliers")
-
+        
         local speedValue = speedMultFolder:FindFirstChild("Sprinting")
         local fovValue = fovMultFolder:FindFirstChild("Sprinting")
 
@@ -89,15 +39,18 @@ local function patchStamina()
 end
 
 patchStamina()
-player.CharacterAdded:Connect(function() task.wait(1) patchStamina() end)
 
--- ======== 3. ESP ======== --
+-- =====================================
+-- 3️⃣ ESP
+-- =====================================
 pcall(function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Gazer-Ha/Forsakontol/refs/heads/main/Esp%20fix"))()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/Gazer-Ha/Forsakontol/refs/heads/main/Esp%20fix'))()
 end)
 
--- ======== 4. CROSSHAIR (Fixed) ======== --
-local cam = workspace:WaitForChild("CurrentCamera")
+-- =====================================
+-- 4️⃣ CROSSHAIR
+-- =====================================
+local cam = workspace.CurrentCamera or workspace:FindFirstChildOfClass("Camera")
 
 local crosshairSettings = {
     color = Color3.fromRGB(255, 128, 255),
@@ -109,58 +62,49 @@ local crosshairSettings = {
     recenter = true
 }
 
--- Cleanup old crosshair
-if getgenv().crosshair_x and getgenv().crosshair_x.Line then
-    getgenv().crosshair_x.Line:Remove()
-end
-if getgenv().crosshair_y and getgenv().crosshair_y.Line then
-    getgenv().crosshair_y.Line:Remove()
-end
-if getgenv().crosshair_x and getgenv().crosshair_x.Connection then
-    getgenv().crosshair_x.Connection:Disconnect()
-end
-if getgenv().crosshair_y and getgenv().crosshair_y.Connection then
-    getgenv().crosshair_y.Connection:Disconnect()
-end
+getgenv().crosshair_x = getgenv().crosshair_x or {}
+getgenv().crosshair_y = getgenv().crosshair_y or {}
 
-getgenv().crosshair_x, getgenv().crosshair_y = {}, {}
-
-local function draw(type, props)
-    local obj = Drawing.new(type)
-    for i, v in pairs(props) do
-        obj[i] = v
-    end
+local function draw(a1, a2)
+    local obj = Drawing.new(a1)
+    for i,v in pairs(a2) do obj[i]=v end
     return obj
 end
 
--- Create horizontal line
-getgenv().crosshair_x.Line = draw("Line", {
-    From = Vector2.new((cam.ViewportSize.X/2) - crosshairSettings.length, (cam.ViewportSize.Y/2)),
-    To = Vector2.new((cam.ViewportSize.X/2) + crosshairSettings.length, (cam.ViewportSize.Y/2)),
+-- Clear previous crosshairs
+if getgenv().crosshair_x["Line"] then getgenv().crosshair_x["Line"]:Remove() end
+if getgenv().crosshair_x["Connection"] then getgenv().crosshair_x["Connection"]:Disconnect() end
+getgenv().crosshair_x = {}
+
+if getgenv().crosshair_y["Line"] then getgenv().crosshair_y["Line"]:Remove() end
+if getgenv().crosshair_y["Connection"] then getgenv().crosshair_y["Connection"]:Disconnect() end
+getgenv().crosshair_y = {}
+
+-- Draw crosshair
+getgenv().crosshair_x["Line"] = draw("Line", {
+    To = Vector2.new((cam.ViewportSize.X/2)-crosshairSettings.x_offset-crosshairSettings.length,(cam.ViewportSize.Y/2)-crosshairSettings.y_offset),
+    From = Vector2.new((cam.ViewportSize.X/2)-crosshairSettings.x_offset+crosshairSettings.length,(cam.ViewportSize.Y/2)-crosshairSettings.y_offset),
+    Thickness = crosshairSettings.thickness,
+    Color = crosshairSettings.color,
+    Transparency = crosshairSettings.opacity,
+    Visible = true
+})
+getgenv().crosshair_y["Line"] = draw("Line", {
+    To = Vector2.new((cam.ViewportSize.X/2)-crosshairSettings.x_offset,(cam.ViewportSize.Y/2)-crosshairSettings.y_offset-crosshairSettings.length),
+    From = Vector2.new((cam.ViewportSize.X/2)-crosshairSettings.x_offset,(cam.ViewportSize.Y/2)-crosshairSettings.y_offset+crosshairSettings.length),
     Thickness = crosshairSettings.thickness,
     Color = crosshairSettings.color,
     Transparency = crosshairSettings.opacity,
     Visible = true
 })
 
--- Create vertical line
-getgenv().crosshair_y.Line = draw("Line", {
-    From = Vector2.new((cam.ViewportSize.X/2), (cam.ViewportSize.Y/2) - crosshairSettings.length),
-    To = Vector2.new((cam.ViewportSize.X/2), (cam.ViewportSize.Y/2) + crosshairSettings.length),
-    Thickness = crosshairSettings.thickness,
-    Color = crosshairSettings.color,
-    Transparency = crosshairSettings.opacity,
-    Visible = true
-})
-
--- Recenter on resize
 if crosshairSettings.recenter then
-    getgenv().crosshair_x.Connection = cam:GetPropertyChangedSignal("ViewportSize"):Connect(function()
-        getgenv().crosshair_x.Line.From = Vector2.new((cam.ViewportSize.X/2) - crosshairSettings.length, (cam.ViewportSize.Y/2))
-        getgenv().crosshair_x.Line.To = Vector2.new((cam.ViewportSize.X/2) + crosshairSettings.length, (cam.ViewportSize.Y/2))
+    getgenv().crosshair_x["Connection"] = cam:GetPropertyChangedSignal("ViewportSize"):Connect(function()
+        getgenv().crosshair_x["Line"].To = Vector2.new((cam.ViewportSize.X/2)-crosshairSettings.x_offset-crosshairSettings.length,(cam.ViewportSize.Y/2)-crosshairSettings.y_offset)
+        getgenv().crosshair_x["Line"].From = Vector2.new((cam.ViewportSize.X/2)-crosshairSettings.x_offset+crosshairSettings.length,(cam.ViewportSize.Y/2)-crosshairSettings.y_offset)
     end)
-    getgenv().crosshair_y.Connection = cam:GetPropertyChangedSignal("ViewportSize"):Connect(function()
-        getgenv().crosshair_y.Line.From = Vector2.new((cam.ViewportSize.X/2), (cam.ViewportSize.Y/2) - crosshairSettings.length)
-        getgenv().crosshair_y.Line.To = Vector2.new((cam.ViewportSize.X/2), (cam.ViewportSize.Y/2) + crosshairSettings.length)
+    getgenv().crosshair_y["Connection"] = cam:GetPropertyChangedSignal("ViewportSize"):Connect(function()
+        getgenv().crosshair_y["Line"].To = Vector2.new((cam.ViewportSize.X/2)-crosshairSettings.x_offset,(cam.ViewportSize.Y/2)-crosshairSettings.y_offset-crosshairSettings.length)
+        getgenv().crosshair_y["Line"].From = Vector2.new((cam.ViewportSize.X/2)-crosshairSettings.x_offset,(cam.ViewportSize.Y/2)-crosshairSettings.y_offset+crosshairSettings.length)
     end)
 end

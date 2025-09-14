@@ -1,16 +1,19 @@
--- ======== 1. STAMINA PATCH ======== --
+-- ======== VARIABLES ======== --
 local player = game.Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+local character = player.Character or player.CharacterAdded:Wait()
+local cam = workspace.CurrentCamera or workspace:FindFirstChildOfClass("Camera")
 
+-- ======== STAMINA PATCH ======== --
 local function waitFor(child, name, timeout)
     return child:WaitForChild(name, timeout or 10)
 end
 
 local function patchStamina()
-    local character = player.Character or player.CharacterAdded:Wait()
     local success, err = pcall(function()
         local speedMultFolder = waitFor(character, "SpeedMultipliers")
         local fovMultFolder = waitFor(character, "FOVMultipliers")
-
+        
         local speedValue = speedMultFolder:FindFirstChild("Sprinting")
         local fovValue = fovMultFolder:FindFirstChild("Sprinting")
 
@@ -37,16 +40,8 @@ local function patchStamina()
 end
 
 patchStamina()
-player.CharacterAdded:Connect(function() task.wait(1) patchStamina() end)
 
--- ======== 2. ESP ======== --
-pcall(function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Gazer-Ha/Forsakontol/refs/heads/main/Esp%20fix"))()
-end)
-
--- ======== 3. CROSSHAIR (Your Original Version) ======== --
-local cam = workspace.CurrentCamera
-
+-- ======== CROSSHAIR ======== --
 local crosshairSettings = {
     color = Color3.fromRGB(255, 128, 255),
     thickness = 2,
@@ -57,32 +52,94 @@ local crosshairSettings = {
     recenter = true
 }
 
-getgenv().crosshair_x, getgenv().crosshair_y = {}, {}
+getgenv().crosshair_x = getgenv().crosshair_x or {}
+getgenv().crosshair_y = getgenv().crosshair_y or {}
 
-local function draw(type, properties)
-    local obj = Drawing.new(type)
-    for i, v in pairs(properties) do
-        obj[i] = v
-    end
+local function draw(a1, a2)
+    local obj = Drawing.new(a1)
+    for i,v in pairs(a2) do obj[i]=v end
     return obj
 end
 
--- Horizontal line
-getgenv().crosshair_x.Line = draw("Line", {
-    From = Vector2.new((cam.ViewportSize.X/2) - crosshairSettings.length, (cam.ViewportSize.Y/2)),
-    To = Vector2.new((cam.ViewportSize.X/2) + crosshairSettings.length, (cam.ViewportSize.Y/2)),
+-- Clear previous crosshairs
+if getgenv().crosshair_x["Line"] then getgenv().crosshair_x["Line"]:Remove() end
+if getgenv().crosshair_x["Connection"] then getgenv().crosshair_x["Connection"]:Disconnect() end
+getgenv().crosshair_x = {}
+
+if getgenv().crosshair_y["Line"] then getgenv().crosshair_y["Line"]:Remove() end
+if getgenv().crosshair_y["Connection"] then getgenv().crosshair_y["Connection"]:Disconnect() end
+getgenv().crosshair_y = {}
+
+-- Draw crosshair
+getgenv().crosshair_x["Line"] = draw("Line", {
+    To = Vector2.new((cam.ViewportSize.X/2)-crosshairSettings.x_offset-crosshairSettings.length,(cam.ViewportSize.Y/2)-crosshairSettings.y_offset),
+    From = Vector2.new((cam.ViewportSize.X/2)-crosshairSettings.x_offset+crosshairSettings.length,(cam.ViewportSize.Y/2)-crosshairSettings.y_offset),
+    Thickness = crosshairSettings.thickness,
+    Color = crosshairSettings.color,
+    Transparency = crosshairSettings.opacity,
+    Visible = true
+})
+getgenv().crosshair_y["Line"] = draw("Line", {
+    To = Vector2.new((cam.ViewportSize.X/2)-crosshairSettings.x_offset,(cam.ViewportSize.Y/2)-crosshairSettings.y_offset-crosshairSettings.length),
+    From = Vector2.new((cam.ViewportSize.X/2)-crosshairSettings.x_offset,(cam.ViewportSize.Y/2)-crosshairSettings.y_offset+crosshairSettings.length),
     Thickness = crosshairSettings.thickness,
     Color = crosshairSettings.color,
     Transparency = crosshairSettings.opacity,
     Visible = true
 })
 
--- Vertical line
-getgenv().crosshair_y.Line = draw("Line", {
-    From = Vector2.new((cam.ViewportSize.X/2), (cam.ViewportSize.Y/2) - crosshairSettings.length),
-    To = Vector2.new((cam.ViewportSize.X/2), (cam.ViewportSize.Y/2) + crosshairSettings.length),
-    Thickness = crosshairSettings.thickness,
-    Color = crosshairSettings.color,
-    Transparency = crosshairSettings.opacity,
-    Visible = true
-})
+if crosshairSettings.recenter then
+    getgenv().crosshair_x["Connection"] = cam:GetPropertyChangedSignal("ViewportSize"):Connect(function()
+        getgenv().crosshair_x["Line"].To = Vector2.new((cam.ViewportSize.X/2)-crosshairSettings.x_offset-crosshairSettings.length,(cam.ViewportSize.Y/2)-crosshairSettings.y_offset)
+        getgenv().crosshair_x["Line"].From = Vector2.new((cam.ViewportSize.X/2)-crosshairSettings.x_offset+crosshairSettings.length,(cam.ViewportSize.Y/2)-crosshairSettings.y_offset)
+    end)
+    getgenv().crosshair_y["Connection"] = cam:GetPropertyChangedSignal("ViewportSize"):Connect(function()
+        getgenv().crosshair_y["Line"].To = Vector2.new((cam.ViewportSize.X/2)-crosshairSettings.x_offset,(cam.ViewportSize.Y/2)-crosshairSettings.y_offset-crosshairSettings.length)
+        getgenv().crosshair_y["Line"].From = Vector2.new((cam.ViewportSize.X/2)-crosshairSettings.x_offset,(cam.ViewportSize.Y/2)-crosshairSettings.y_offset+crosshairSettings.length)
+    end)
+end
+
+-- ======== LOAD ESP ======== --
+pcall(function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/Gazer-Ha/Forsakontol/refs/heads/main/Esp%20fix'))()
+end)
+
+-- ======== DO GENERATORS GUI ======== --
+local function createGeneratorGui()
+    -- Prevent duplicates
+    if playerGui:FindFirstChild("RemoteButtonGui") then return end
+
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "RemoteButtonGui"
+    screenGui.Parent = playerGui
+
+    local button = Instance.new("TextButton")
+    button.Size = UDim2.new(0,150,0,50)
+    button.Position = UDim2.new(0.5,-75,0.5,-25)
+    button.BackgroundColor3 = Color3.fromRGB(50,50,50)
+    button.TextColor3 = Color3.fromRGB(255,255,255)
+    button.Text = "Do Generators"
+    button.Active = true
+    button.Draggable = true
+    button.Parent = screenGui
+
+    local remote = workspace:WaitForChild("Map")
+                     :WaitForChild("Ingame")
+                     :WaitForChild("Map")
+                     :WaitForChild("Generator")
+                     :WaitForChild("Remotes")
+                     :WaitForChild("RE")
+
+    button.MouseButton1Click:Connect(function()
+        remote:FireServer()
+    end)
+end
+
+-- Create GUI initially
+createGeneratorGui()
+
+-- Recreate GUI on respawn
+player.CharacterAdded:Connect(function()
+    wait(1)
+    createGeneratorGui()
+end)

@@ -7,11 +7,12 @@ local function createGeneratorGui()
 
     local screenGui = Instance.new("ScreenGui")
     screenGui.Name = "RemoteButtonGui"
+    screenGui.ResetOnSpawn = false -- keep GUI after respawn
     screenGui.Parent = playerGui
 
     local button = Instance.new("TextButton")
     button.Size = UDim2.new(0,150,0,50)
-    button.Position = UDim2.new(0, 20, 0, 5) -- << updated position
+    button.Position = UDim2.new(0.5,-75,0.5,-25) -- back to normal (centered)
     button.BackgroundColor3 = Color3.fromRGB(50,50,50)
     button.TextColor3 = Color3.fromRGB(255,255,255)
     button.Text = "Do Generators"
@@ -31,7 +32,5 @@ local function createGeneratorGui()
     end)
 end
 
-player.CharacterAdded:Connect(function()
-    wait(1)
-    createGeneratorGui()
-end)
+-- Only create once
+createGeneratorGui()

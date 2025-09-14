@@ -11,7 +11,7 @@ local function createGeneratorGui()
 
     local button = Instance.new("TextButton")
     button.Size = UDim2.new(0,150,0,50)
-    button.Position = UDim2.new(0, 100, 0, 10) -- << updated position
+    button.Position = UDim2.new(0, 20, 0, 5) -- << updated position
     button.BackgroundColor3 = Color3.fromRGB(50,50,50)
     button.TextColor3 = Color3.fromRGB(255,255,255)
     button.Text = "Do Generators"

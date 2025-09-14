@@ -1,36 +1,50 @@
-local player = game.Players.LocalPlayer
-local playerGui = player:WaitForChild("PlayerGui")
+-- LocalScript
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
 
-local function createGeneratorGui()
-    -- Prevent duplicates
-    if playerGui:FindFirstChild("RemoteButtonGui") then return end
+-- Remote path
+local remote = workspace:WaitForChild("Map")
+    :WaitForChild("Ingame")
+    :WaitForChild("Map")
+    :WaitForChild("Generator")
+    :WaitForChild("Remotes")
+    :WaitForChild("RE")
+
+-- Function to make the GUI
+local function createGui()
+    -- Avoid duplicates
+    if player:WaitForChild("PlayerGui"):FindFirstChild("RemoteButtonGui") then
+        player.PlayerGui.RemoteButtonGui:Destroy()
+    end
 
     local screenGui = Instance.new("ScreenGui")
     screenGui.Name = "RemoteButtonGui"
-    screenGui.ResetOnSpawn = false -- keep GUI after respawn
-    screenGui.Parent = playerGui
+    screenGui.ResetOnSpawn = false
+    screenGui.Parent = player.PlayerGui
 
     local button = Instance.new("TextButton")
-    button.Size = UDim2.new(0,150,0,50)
-    button.Position = UDim2.new(0.5,-75,0.5,-25) -- back to normal (centered)
-    button.BackgroundColor3 = Color3.fromRGB(50,50,50)
-    button.TextColor3 = Color3.fromRGB(255,255,255)
-    button.Text = "Do Generators"
-    button.Active = true
-    button.Draggable = true
+    button.Size = UDim2.new(0, 150, 0, 40) -- wider for text
+    button.Position = UDim2.new(0, 75, 0, 10) -- position near top
+    button.Text = "Fire Generator"
+    button.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- black
+    button.TextColor3 = Color3.new(1, 1, 1) -- white
     button.Parent = screenGui
 
-    local remote = workspace:WaitForChild("Map")
-                        :WaitForChild("Ingame")
-                        :WaitForChild("Map")
-                        :WaitForChild("Generator")
-                        :WaitForChild("Remotes")
-                        :WaitForChild("RE")
+    -- Make draggable
+    button.Active = true
+    button.Draggable = true
 
+    -- Click fires remote
     button.MouseButton1Click:Connect(function()
         remote:FireServer()
     end)
 end
 
--- Only create once
-createGeneratorGui()
+-- Create on start
+createGui()
+
+-- Recreate if character respawns
+player.CharacterAdded:Connect(function()
+    task.wait(1) -- short delay so PlayerGui is ready
+    createGui()
+end)

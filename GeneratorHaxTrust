@@ -1,20 +1,17 @@
+local player = game.Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
 local function createGeneratorGui()
-    local playerGui = player:WaitForChild("PlayerGui")
+    -- Prevent duplicates
+    if playerGui:FindFirstChild("RemoteButtonGui") then return end
 
-    -- Remove existing GUI
-    if playerGui:FindFirstChild("RemoteButtonGui") then
-        playerGui.RemoteButtonGui:Destroy()
-    end
-
-    -- Create ScreenGui
     local screenGui = Instance.new("ScreenGui")
     screenGui.Name = "RemoteButtonGui"
     screenGui.Parent = playerGui
 
-    -- Create Button
     local button = Instance.new("TextButton")
     button.Size = UDim2.new(0,150,0,50)
-    button.Position = UDim2.new(0,100,0,10)
+    button.Position = UDim2.new(0, 100, 0, 10) -- << updated position
     button.BackgroundColor3 = Color3.fromRGB(50,50,50)
     button.TextColor3 = Color3.fromRGB(255,255,255)
     button.Text = "Do Generators"
@@ -22,18 +19,18 @@ local function createGeneratorGui()
     button.Draggable = true
     button.Parent = screenGui
 
-    -- Button click loads external script
+    local remote = workspace:WaitForChild("Map")
+                        :WaitForChild("Ingame")
+                        :WaitForChild("Map")
+                        :WaitForChild("Generator")
+                        :WaitForChild("Remotes")
+                        :WaitForChild("RE")
+
     button.MouseButton1Click:Connect(function()
-        pcall(function()
-            workspace:WaitForChild("Map"):WaitForChild("Ingame"):WaitForChild("Map"):WaitForChild("Generator"):WaitForChild("Remotes"):WaitForChild("RE"):FireServer()
-        end)
+        remote:FireServer()
     end)
 end
 
--- Run initially
-createGeneratorGui()
-
--- Recreate on respawn
 player.CharacterAdded:Connect(function()
     wait(1)
     createGeneratorGui()
